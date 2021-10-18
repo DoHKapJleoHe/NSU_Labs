@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	fin.open(path_in);
 	if (!fin.is_open())
 	{
-		cout << "Couldn't open text.txt!";
+    	cout << "Couldn't open text.txt!";
 	}
 	else
 	{
@@ -30,12 +30,18 @@ int main(int argc, char *argv[])
 			getline(fin, line); // reading the sentence
 			int length = line.length(); // the length of current sentence
 			string slovo;
-			for (int i = 0; i < length; i++)
+			for (int i = 0; i < length ; i++)
 			{
 				if (isalpha(line[i]) || isdigit(line[i]))
 				{
 					slovo += line[i];
-					
+					if (i == length - 1) // это нужно для того, чтобы последнее слово в строчке тоже было использовано
+					{					 // в противном случае программа чиатет последнее слово в строчке, но ничего с ним не делает
+						words[slovo] += 1;
+						kol_vo_clov_v_tekste += 1;
+						slovo = "";
+						break;
+					}
 				}
 				else
 				{
