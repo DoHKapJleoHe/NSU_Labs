@@ -1,6 +1,7 @@
 #include "TritSet.h"
 #include<iostream>
 
+////////////// TritSet constructor //////////////
 TritSet::TritSet(size_t size, Trit trit) : array_size(size), logical_size(trit == UNKNOWN ? 0 : size)
 {
 	 uint *arr = new uint[size];
@@ -20,6 +21,17 @@ TritSet::TritSet(size_t size, Trit trit) : array_size(size), logical_size(trit =
 	 {
 		 arr[i] = xpeHb_gJl9_mpumoB;
 	 }
+}
+
+////////////// Copy constructor //////////////
+TritSet::TritSet(const TritSet& trit_set) : array_size(trit_set.array_size), logical_size(trit_set.logical_size), alloc_size(trit_set.alloc_size),
+											true_count(trit_set.true_count), false_count(trit_set.false_count), unknown_count(trit_set.unknown_count)
+{
+	uint* new_arr = new uint[array_size];
+	for (size_t i = 0; i < array_size; i++)
+	{
+		new_arr[i] = array[i];
+	}
 }
 
 size_t TritSet::cardinality(Trit trit)
@@ -46,7 +58,7 @@ void TritSet::shrink()
 	if (!alloc_size)
 		return;
 	long long last_index = get_last_index();
-	Trim(last_index);
+	trim(last_index);
 	array_size = last_index + 1;
 	logical_size = last_index + 1;
 }
@@ -56,7 +68,7 @@ void TritSet::shrink()
 	change_size_of_TritSet(last_index);
 }*/
 
-void TritSet::Trim(long long position) // было change_tritset_size
+void TritSet::trim(size_t position) // было change_tritset_size
 {
 	size_t new_alloc_size = get_alloc_size(position);
 
@@ -90,7 +102,7 @@ void TritSet::Trim(long long position) // было change_tritset_size
 	array_size = position + 1;
 }
 
-long long TritSet::get_alloc_size(long long array_size)
+long long TritSet::get_alloc_size(size_t array_size)
 {
 	if (array_size < 0)
 		return 0;
@@ -99,7 +111,7 @@ long long TritSet::get_alloc_size(long long array_size)
 }
 
 
-long long TritSet::get_last_index()
+size_t TritSet::get_last_index()
 {
 	size_t last_index = -1;
 	for (size_t i = 0; i < array_size; i++)
