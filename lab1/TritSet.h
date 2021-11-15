@@ -33,17 +33,16 @@ public:
 	};
 
 	size_t size();
-	//TritSet& operator = (Trit&&);
 	reference operator [] (size_t);
 	Trit operator [] (size_t) const;
 	size_t capacity();
-	long long get_last_index();
+	size_t get_last_index();
 	void shrink();
-	void Trim(long long);
-	long long get_alloc_size(long long);
+	TritSet(const TritSet&);
+	void trim(size_t);
+	long long get_alloc_size(size_t);
 	std::unordered_map<Trit, size_t, std::hash<size_t>> cardinality();
 	size_t cardinality(Trit);
-	//void Trim(size_t);
 };
 
 TritSet operator & (const TritSet& trit_set1, const TritSet& trit_set2);
