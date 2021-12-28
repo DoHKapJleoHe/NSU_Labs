@@ -1,1 +1,1 @@
-# NSU_Labs_Third_Semester_C++
+# NSU_Labs
