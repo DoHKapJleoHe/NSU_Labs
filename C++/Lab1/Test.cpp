@@ -136,37 +136,51 @@ TEST(TestOpearorAND, AND_operator)
 	TritSet set(5);
 	TritSet true_set(5, Trit::TRUE), false_set(5, Trit::FALSE), unknown_set(5, Trit::UNKNOWN);
 
-	// TRUE | TRUE
+	// TRUE & TRUE
 	set = true_set & true_set;
 	ASSERT_EQ(set.size(), 5);
 	ASSERT_EQ(set, true_set);
 
-	// FALSE | FALSE
+	// FALSE & FALSE
 	set = false_set & false_set;
 	ASSERT_EQ(set.size(), 5);
 	ASSERT_EQ(set, false_set);
 
-	// UNKNOWN | UNKNOWN
-	set = unknown_set | unknown_set;
+	// UNKNOWN & UNKNOWN
+	set = unknown_set & unknown_set;
 	ASSERT_EQ(set.size(), 5);
 	ASSERT_EQ(set, unknown_set);
 
-	// TRUE | FALSE
-	set = true_set | false_set;
+	// TRUE & FALSE
+	set = true_set & false_set;
 	ASSERT_EQ(set.size(), 5);
-	ASSERT_EQ(set, true_set);
+	ASSERT_EQ(set, false_set);
 
-	// TRUE | UNKNOWN
-	set = true_set | unknown_set;
+	// TRUE & UNKNOWN
+	set = true_set & unknown_set;
 	ASSERT_EQ(set.size(), 5);
-	ASSERT_EQ(set, true_set);
+	ASSERT_EQ(set, unknown_set);
 
-	// FALSE | UNKNOWN
+	// FALSE & UNKNOWN
 	set = false_set | unknown_set;
+	ASSERT_EQ(set.size(), 5);
+	ASSERT_EQ(set, false_set);
+}
+
+TEST(TestOpearorNOT, NOT_operator)
+{
+	TritSet set(5);
+	TritSet true_set(5, Trit::TRUE), false_set(5, Trit::FALSE), unknown_set(5, Trit::UNKNOWN);
+
+	set = ~false_set;
+	ASSERT_EQ(set.size(), 5);
+	ASSERT_EQ(set, true_set);
+
+	set = ~true_set;
+	ASSERT_EQ(set.size(), 5);
+	ASSERT_EQ(set, false_set);
+
+	set = ~unknown_set;
 	ASSERT_EQ(set.size(), 5);
 	ASSERT_EQ(set, unknown_set);
 }
-
-/*TEST(TestOpearorNOT, NOT_operator)
-{
-}*/
