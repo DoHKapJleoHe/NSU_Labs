@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
                         return 0;
                 }
         }
+        pid_t res = wait(NULL);
         printf("Text written by parrent");
         return 0;
 }
