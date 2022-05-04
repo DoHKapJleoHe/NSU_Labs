@@ -41,7 +41,7 @@ int main(int argc, char* argv[])
 {
   int fileDescriptor = 0;
 
-  if((fileDescriptor = open("/home/students/20200/e.vartazaryan/Lab5/txt", O_RDONLY)) == -1)
+  if((fileDescriptor = open("/home/students/20200/e.vartazaryan/Lab5/file.txt", O_RDONLY)) == -1)
   {
     perror("File doesn't exist\n");
     return 0;
