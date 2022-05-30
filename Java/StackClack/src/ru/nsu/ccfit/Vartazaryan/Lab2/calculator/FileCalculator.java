@@ -1,15 +1,11 @@
-package ru.nsu.ccfit.Vartazaryan.Lab2.Calculator;
+package ru.nsu.ccfit.Vartazaryan.Lab2.calculator;
 
-import ru.nsu.ccfit.Vartazaryan.Lab2.Calculator.CalcStack;
-import ru.nsu.ccfit.Vartazaryan.Lab2.Factory.ComFac;
+import ru.nsu.ccfit.Vartazaryan.Lab2.factory.ComFac;
 import ru.nsu.ccfit.Vartazaryan.Lab2.commands.Command;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Properties;
 import java.util.Scanner;
 
 public class FileCalculator

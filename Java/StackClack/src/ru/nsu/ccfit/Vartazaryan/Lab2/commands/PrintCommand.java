@@ -1,8 +1,6 @@
 package ru.nsu.ccfit.Vartazaryan.Lab2.commands;
 
-import ru.nsu.ccfit.Vartazaryan.Lab2.Calculator.CalcStack;
-
-import java.util.EmptyStackException;
+import ru.nsu.ccfit.Vartazaryan.Lab2.calculator.CalcStack;
 
 public class PrintCommand implements Command
 {

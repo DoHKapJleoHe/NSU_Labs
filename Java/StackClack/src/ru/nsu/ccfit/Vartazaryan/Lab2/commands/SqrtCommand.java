@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.Vartazaryan.Lab2.commands;
 
-import ru.nsu.ccfit.Vartazaryan.Lab2.Calculator.CalcStack;
+import ru.nsu.ccfit.Vartazaryan.Lab2.calculator.CalcStack;
 
 public class SqrtCommand implements Command
 {
@@ -10,6 +10,6 @@ public class SqrtCommand implements Command
         double num = ctx.pop();
         num = Math.sqrt(num);
 
-        ctx.push(Double.toString(num));
+        ctx.push(num);
     }
 }

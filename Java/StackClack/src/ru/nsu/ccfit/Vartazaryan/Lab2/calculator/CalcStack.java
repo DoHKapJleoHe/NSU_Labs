@@ -1,4 +1,4 @@
-package ru.nsu.ccfit.Vartazaryan.Lab2.Calculator;
+package ru.nsu.ccfit.Vartazaryan.Lab2.calculator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,29 +12,19 @@ public class CalcStack
 
     public CalcStack(){}; // Constructor
 
-    public void push(String arg)
-    {
-        /*if(!isNumber(arg))
+    public void push(String arg) {
+        //System.out.println("Pushing string");
+
+        if(!isNumber(arg))
         {
             numberStack.push(valuesOfVariables.get(arg));// if argument is a letter
         }
         else {
             numberStack.push(Double.parseDouble(arg));//if argument is number
-        }*/
-        numberStack.push(valuesOfVariables.get(arg));
+        }
     }
 
-    public void push(double arg)
-    {
-        numberStack.push(arg);
-    }
-
-    public double pop()
-    {
-        return numberStack.pop();
-    }
-
-    /*public boolean isNumber(String str)
+    public boolean isNumber(String str)
     {
         if (str == null || str.isEmpty())
             return false;
@@ -44,17 +34,27 @@ public class CalcStack
                 return false;
         }
         return true;
-    }*/
-
-    public double peek()
-    {
-        return numberStack.peek();
     }
 
-    public void addVar(String variable, Double value)
+    public void push(double arg)
     {
-        valuesOfVariables.put(variable, value);
+        //System.out.println("Pushing num");
+        numberStack.push(arg);
     }
+
+    public double pop() { return numberStack.pop(); }
+
+    public double peek() {
+        try {
+            return numberStack.peek();
+        }
+        catch (Exception e) {
+            System.out.println("Exception :(");
+        }
+        return 0;
+    }
+
+    public void addVar(String variable, Double value){ valuesOfVariables.put(variable, value);}
 }
 
 

@@ -1,6 +1,6 @@
 package ru.nsu.ccfit.Vartazaryan.Lab2.commands;
 
-import ru.nsu.ccfit.Vartazaryan.Lab2.Calculator.CalcStack;
+import ru.nsu.ccfit.Vartazaryan.Lab2.calculator.CalcStack;
 
 public class MinusCommand implements Command
 {
