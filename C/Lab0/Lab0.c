@@ -5,7 +5,8 @@
 #include <string.h>
 #include <stdlib.h>
 
-int char_to_dig(char c) {
+int char_to_dig(char c) 
+{
 	
 	if (c >= 'a' && c <= 'z')
 		c += 'A' - 'a';
@@ -13,42 +14,46 @@ int char_to_dig(char c) {
 	return (c >= 'A' && c <= 'Z') ? (10 + c - 'A') : (c - '0');
 }
 
-char dig_to_char(int n) {
+char dig_to_char(int n) 
+{
 
 	return (n >= 0 && n <= 9) ? ('0' + n) : ('A' - 10 + n);
 }
 
-	long double translate_to_10_drobnoe(int num_sys, char* number)
-	{
-		long double sum = 0;
-		long long int integer_part = 0;
-		int i = 0;
-		char c = 0;
+long double translate_to_10_drobnoe(int num_sys, char* number)
+{
+	long double sum = 0;
+	long long int integer_part = 0;
+	int i = 0;
+	char c = 0;
 
-
-		for (i = 0; (c = *number) != '.'; ++i) {
-			integer_part = (integer_part * num_sys) + char_to_dig(c);
-			++number;
-		}
-
-
+	for (i = 0; (c = *number) != '.'; ++i) {
+		integer_part = (integer_part * num_sys) + char_to_dig(c);
 		++number;
-
-
-		for (i = 0; integer_part > 0; ++i) {
-			sum += (integer_part % num_sys) * pow(num_sys, i);
-			integer_part /= num_sys;
-		}
-
-
-		for (i = -1; (c = *number) != '\0'; --i) {
-			sum += char_to_dig(c) * pow(num_sys, i);
-			++number;
-		}
-		return sum;
 	}
 
-double translate_to_10_celoe(int num_sys, char* number) {
+
+	++number;
+
+
+	for (i = 0; integer_part > 0; ++i) 
+	{
+		sum += (integer_part % num_sys) * pow(num_sys, i);
+		integer_part /= num_sys;
+	}
+
+
+	for (i = -1; (c = *number) != '\0'; --i) 
+	{
+		sum += char_to_dig(c) * pow(num_sys, i);
+		++number;
+	}
+	
+	return sum;
+}
+
+double translate_to_10_celoe(int num_sys, char* number) 
+{
 	long double sum = 0;
 	long long int integer_part = 0;
 	int i = 0;
@@ -66,7 +71,8 @@ double translate_to_10_celoe(int num_sys, char* number) {
 	return sum;
 }
 
-void translate(long double number, int num_sys) {
+void translate(long double number, int num_sys) 
+{
 	int i = 0;
 	char integer_result_end[100], fract_result_end[100];
 	long long int integer_part = (long long int)number;
@@ -78,14 +84,16 @@ void translate(long double number, int num_sys) {
 	} while (integer_part);
 	integer_result_end[i] = '\0';
 	int len = i;
-	for (i = 0; i < len / 2; ++i) {
+	for (i = 0; i < len / 2; ++i) 
+	{
 		int temp = integer_result_end[i];
 		integer_result_end[i] = integer_result_end[len - i - 1];
 		integer_result_end[len - i - 1] = temp;
 	}
 
 	i = 0;
-	while (fract_part > 0 && i < 12) {
+	while (fract_part > 0 && i < 12)
+	{
 		fract_part *= num_sys;
 		integer_part = (long long int)fract_part;
 		fract_part -= (long long int)fract_part;
@@ -100,7 +108,8 @@ void translate(long double number, int num_sys) {
 		printf("%s.%s\n", integer_result_end, fract_result_end);
 }
 
-int main() {
+int main() 
+{
 
 	int num_sys1 = 0;
 	int num_sys2 = 0;
@@ -134,7 +143,8 @@ int main() {
 		printf("bad input\n");
 		return 0;
 	}
-	while (*p) {
+	while (*p) 
+	{
 		if ((char_to_dig(*p) > num_sys1 - 1) && (*p != '.')) 
 		{
 			printf("bad input\n");
