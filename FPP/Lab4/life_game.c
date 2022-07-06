@@ -25,7 +25,7 @@ int main()
 	int* cur_state = (int*)malloc(SIZE * SIZE * sizeof(int));
 	if (all_states == NULL || cur_state == NULL) 
 	{
-		printf("No heap for you cumlord\n");
+		printf("No memory\n");
 		return 0;
 	}
 	
@@ -57,7 +57,7 @@ int main()
 		cur_state = (int*)malloc(SIZE * SIZE * sizeof(int));
 		if (cur_state == NULL)
 		{
-			printf("No heap for you shitfuck\n");
+			printf("No memory\n");
 			return 0;
 		}
 
