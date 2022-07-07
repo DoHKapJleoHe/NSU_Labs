@@ -171,7 +171,7 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		MPI_Wait(&receive_top, NULL);
+		MPI_Wait(&receive_top, MPI_STATUS_IGNORE);
 
 		for (int j = 0; j < SIZE; j++)
 		{
@@ -224,7 +224,7 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		MPI_Wait(&receive_bottom, NULL);
+		MPI_Wait(&receive_bottom, MPI_STATUS_IGNORE);
 
 		for (int j = 0; j < SIZE; j++)
 		{
@@ -277,8 +277,8 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		MPI_Wait(&send_bottom, NULL);
-		MPI_Wait(&send_top, NULL);
+		MPI_Wait(&send_bottom, MPI_STATUS_IGNORE);
+		MPI_Wait(&send_top, MPI_STATUS_IGNORE);
 
 		for (int back_step = iter; back_step >= 0; back_step--)
 		{
@@ -298,7 +298,7 @@ int main(int argc, char* argv[])
 			}
 		}
 
-		MPI_Allreduce(flags, MPI_IN_PLACE, MAX_ITERATIONS, MPI_INT, MPI_LAND, MPI_COMM_WORLD);
+		MPI_Allreduce(MPI_IN_PLACE, flags, MAX_ITERATIONS, MPI_INT, MPI_LAND, MPI_COMM_WORLD);
 
 		int check = 0;
 		for (int i = 0; i < iter; i++)
