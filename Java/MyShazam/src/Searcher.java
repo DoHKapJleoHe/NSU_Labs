@@ -1,31 +1,44 @@
 import jdk.jfr.StackTrace;
 
 import java.io.*;
+import java.util.Scanner;
 
 public class Searcher
 {
     public Searcher() {}
 
-    public void run(String fileName) throws FileNotFoundException {
-        File root = new File("C:\\Users\\eduar\\Desktop\\Тексты песен");
+    public void run() throws FileNotFoundException {
+        File root = new File("C:/Users/eduar/Desktop/Тексты песен");
 
-        if(root.isDirectory())
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Write song name: ");
+        String songName = scanner.nextLine();;
+
+        while(scanner.hasNext())
         {
-            File[] filesInDirectory = root.listFiles(); //listing files of directory in an array
-            if (filesInDirectory == null) {
-                System.out.println("There is no files in the directory!");
-                System.exit(0);
-            }
+            //System.out.println("Write song name: ");
 
-            File searchedFile = new File(fileName);
-
-            for (File file : filesInDirectory)
+            if (root.isDirectory())
             {
-                if (file.compareTo(searchedFile) == 0) //if they are equal
+                File[] filesInDirectory = root.listFiles(); //listing files of directory in an array
+                if (filesInDirectory == null)
                 {
-                    showFile(file);
+                    System.out.println("There is no files in the directory!");
+                    System.exit(0);
+                }
+
+                File searchedFile = new File(songName);
+
+                for (File file : filesInDirectory)
+                {
+                    if (file.getName().equals(searchedFile.getName())) //if they are equal
+                    {
+                        showFile(file);
+                    }
                 }
             }
+
+            songName = scanner.nextLine();
         }
     }
 
