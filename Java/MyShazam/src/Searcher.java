@@ -12,12 +12,12 @@ public class Searcher
 
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write song name: ");
-        String songName = scanner.nextLine();;
+        String songName;
 
         while(scanner.hasNext())
         {
             //System.out.println("Write song name: ");
-
+            songName = scanner.nextLine();
             if (root.isDirectory())
             {
                 File[] filesInDirectory = root.listFiles(); //listing files of directory in an array
@@ -27,18 +27,18 @@ public class Searcher
                     System.exit(0);
                 }
 
-                File searchedFile = new File(songName);
+                //File searchedFile = new File(songName);
 
                 for (File file : filesInDirectory)
                 {
-                    if (file.getName().equals(searchedFile.getName())) //if they are equal
+                    //System.out.println(file.getName());
+                    if (file.getName().replace(".txt", "").equals(songName))
                     {
                         showFile(file);
                     }
                 }
             }
-
-            songName = scanner.nextLine();
+            System.out.println("Write song name: ");
         }
     }
 
