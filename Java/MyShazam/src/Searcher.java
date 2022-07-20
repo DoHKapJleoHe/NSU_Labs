@@ -16,7 +16,6 @@ public class Searcher
 
         while(scanner.hasNext())
         {
-            //System.out.println("Write song name: ");
             songName = scanner.nextLine();
             if (root.isDirectory())
             {
@@ -27,11 +26,8 @@ public class Searcher
                     System.exit(0);
                 }
 
-                //File searchedFile = new File(songName);
-
                 for (File file : filesInDirectory)
                 {
-                    //System.out.println(file.getName());
                     if (file.getName().replace(".txt", "").equals(songName))
                     {
                         showFile(file);
