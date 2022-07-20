@@ -7,7 +7,8 @@ public class Searcher
 {
     public Searcher() {}
 
-    public void run() throws FileNotFoundException {
+    public void run() throws FileNotFoundException
+    {
         File root = new File("C:/Users/eduar/Desktop/Тексты песен");
 
         Scanner scanner = new Scanner(System.in);
