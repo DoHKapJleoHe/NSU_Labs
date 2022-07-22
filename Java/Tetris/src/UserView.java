@@ -3,8 +3,8 @@ import java.awt.*;
 
 public class UserView extends JFrame // this class will inherit all functions of JFrame
 {
-    private JButton startButton = new JButton("Start");
-    private JLabel gameName = new JLabel("TETRIS");
+    private JButton startButton;
+    private JLabel gameName;
 
     public UserView()
     {
@@ -15,8 +15,22 @@ public class UserView extends JFrame // this class will inherit all functions of
     public void init()
     {
         this.setBounds(100, 100, 250, 250);
-        Container container = this.getContentPane();
-        // container is an entity that will contain our objects such as buttons, labels etc.
-        // this.getContentPane() means that container will contain objects of our frame
+        this.setVisible(true);
+
+        startButton = new JButton("Start");
+        startButton.setSize(100, 30);
+        startButton.setLocation(20, 50);
+
+        gameName = new JLabel("TETRIS");
+        gameName.setSize(100, 30);
+        gameName.setLocation(50, 20);
+
+        this.getContentPane().setLayout(null); // so that the elements do not stretch to full frame
+        this.add(startButton);
+        this.add(gameName);
+
+        startButton.addActionListener(e -> {
+
+        });
     }
 }
