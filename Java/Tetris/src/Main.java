@@ -1,12 +1,16 @@
+import Controller.MenuController;
+import Model.MenuModel;
+import View.MenuView;
+
 import javax.swing.*;
 
 public class Main
 {
     public static void main(String[] args)
     {
-        Model model = new Model();
-        Controller controller = new Controller();
-        UserView newFrame = new UserView(controller);
+        MenuModel model = new MenuModel();
+        MenuController controller = new MenuController(model);
+        MenuView newFrame = new MenuView(controller);
 
         SwingUtilities.invokeLater(() -> {
             newFrame.initStartScreen();
