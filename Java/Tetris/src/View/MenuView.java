@@ -3,6 +3,8 @@ package View;
 import javax.swing.*;
 import Controller.MenuController;
 
+import java.awt.*;
+
 public class MenuView extends JFrame // this class will inherit all functions of JFrame
 {
     private JButton startButton;
@@ -18,7 +20,7 @@ public class MenuView extends JFrame // this class will inherit all functions of
 
     public void initStartScreen()
     {
-        this.setBounds(100, 100, 250, 250);
+        this.setBounds(650, 300, 250, 300);
         this.setVisible(true);
 
         // parameters of button
@@ -40,15 +42,32 @@ public class MenuView extends JFrame // this class will inherit all functions of
         this.add(aboutButton);
         this.add(gameName); // adding label to frame
 
+        startButton.addActionListener(e -> {
+            this.setVisible(false);
+            startGame();
+        });
+
         aboutButton.addActionListener(e -> {
             openAboutFrame();
         });
     }
 
+    private void startGame()
+    {
+        /*JFrame gameField = new JFrame("Tetris");
+        gameField.setBounds(650, 150, 400, 600);
+        gameField.setVisible(true);
+
+        gameField.getContentPane().setBackground(Color.white);*/
+
+        GameBoard gameboard = new GameBoard();
+        gameboard.start();
+    }
+
     private void openAboutFrame()
     {
         JFrame aboutFrame = new JFrame("About");
-        aboutFrame.setBounds(100, 100, 250, 250);
+        aboutFrame.setBounds(650, 300, 250, 250);
         aboutFrame.setVisible(true);
 
         JButton closeButton = new JButton("Close");
@@ -61,6 +80,5 @@ public class MenuView extends JFrame // this class will inherit all functions of
         aboutFrame.getContentPane().setLayout(null);
         aboutFrame.add(closeButton);
     }
-
 
 }
