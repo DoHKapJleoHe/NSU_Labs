@@ -12,7 +12,6 @@ public class Tetris extends JFrame
         add(gameBoard);
 
         gameBoard.newFigure();
-        gameBoard.newFigure();
 
         setSize(200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

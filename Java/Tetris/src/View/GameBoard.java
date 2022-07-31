@@ -25,6 +25,14 @@ public class GameBoard extends JPanel implements ActionListener
 
         // each element of this array is a figure(mb it is correct to say that each element is a piece of a figure)
         board = new Figure.Shapes[BOARD_WIDTH * BOARD_HEIGHT];
+        for(int i = 0; i < BOARD_HEIGHT; i++)
+        {
+            for(int j = 0; j < BOARD_WIDTH; j++)
+            {
+                board[i * BOARD_WIDTH + j] = Figure.Shapes.Noshape;
+            }
+        }
+
         currentFigure = new Figure();
 
         timer = new Timer(400,this);
@@ -66,10 +74,10 @@ public class GameBoard extends JPanel implements ActionListener
     public void newFigure()
     {
         currentFigure = new Figure(); // creating new figure to drop
-        currentFigure.setFigure(Figure.Shapes.Lineshape);
+        currentFigure.setFigure(Figure.Shapes.Squareshape);
 
         curX = BOARD_WIDTH / 2;
-        curY = BOARD_HEIGHT - 1;
+        curY = BOARD_HEIGHT - 1 -2;
 
         if(!tryToMove(currentFigure, curX, curY))
         {
