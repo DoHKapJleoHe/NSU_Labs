@@ -47,5 +47,18 @@ public class Figure
         return figure;
     }
 
+    public int pieceX(int index)
+    {
+        // taking "x" coordinate of each piece of figure(each figure consists of 4 pieces)
+        // i use "index" to choose a piece of figure; 0 means that i need "x" coordinate of that piece
+        return coordinates[index][0];
+    }
+
+    public int pieceY(int index)
+    {
+        // taking "y" coordinate of each piece of figure(each figure consists of 4 pieces)
+        // i use "index" to choose a piece of figure; 1 means that i need "y" coordinate of that piece
+        return coordinates[index][1];
+    }
 
 }

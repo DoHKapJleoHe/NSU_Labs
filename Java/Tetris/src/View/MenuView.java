@@ -23,11 +23,12 @@ public class MenuView extends JFrame // this class will inherit all functions of
         this.setBounds(650, 300, 250, 300);
         this.setVisible(true);
 
-        // parameters of button
+        // parameters of startButton
         startButton = new JButton("Start");
         startButton.setSize(100, 30);
         startButton.setLocation(60, 50);
 
+        // parameters of aboutButton
         aboutButton = new JButton("About");
         aboutButton.setSize(100, 30);
         aboutButton.setLocation(60, 90);
@@ -44,24 +45,15 @@ public class MenuView extends JFrame // this class will inherit all functions of
 
         startButton.addActionListener(e -> {
             this.setVisible(false);
-            startGame();
+
+            Tetris tetris = new Tetris();
+            tetris.setLocationRelativeTo(null);
+            tetris.setVisible(true);
         });
 
         aboutButton.addActionListener(e -> {
             openAboutFrame();
         });
-    }
-
-    private void startGame()
-    {
-        /*JFrame gameField = new JFrame("Tetris");
-        gameField.setBounds(650, 150, 400, 600);
-        gameField.setVisible(true);
-
-        gameField.getContentPane().setBackground(Color.white);*/
-
-        GameBoard gameboard = new GameBoard();
-        gameboard.start();
     }
 
     private void openAboutFrame()
