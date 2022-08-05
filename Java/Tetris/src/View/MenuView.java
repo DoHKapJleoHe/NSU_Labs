@@ -1,9 +1,10 @@
 package View;
 
 import javax.swing.*;
+
+import Controller.GameController;
 import Controller.MenuController;
 
-import java.awt.*;
 
 public class MenuView extends JFrame // this class will inherit all functions of JFrame
 {
@@ -46,7 +47,9 @@ public class MenuView extends JFrame // this class will inherit all functions of
         startButton.addActionListener(e -> {
             this.setVisible(false);
 
-            Tetris tetris = new Tetris();
+            GameController gc = new GameController();
+
+            Tetris tetris = new Tetris(gc);
             tetris.setLocationRelativeTo(null);
             tetris.setVisible(true);
         });

@@ -1,8 +1,10 @@
 package View;
 
+import java.util.Random;
+
 public class Figure
 {
-    enum Shapes // all variations of figures in the game
+    public enum Shapes // all variations of figures in the game
     {
         Noshape(new int[][]{ {0,0}, {0,0}, {0,0}, {0,0} }),
         Zshape(new int[][]{ {0,-1}, {0,0}, {-1,0}, {-1,1} }),
@@ -42,6 +44,14 @@ public class Figure
         figure = shape;
     }
 
+    public void setRandomFigure()
+    {
+        var r = new Random();
+        int x = Math.abs(r.nextInt()) % 7 + 1;
+
+
+    }
+
     public Shapes getFigure()
     {
         return figure;
@@ -59,6 +69,16 @@ public class Figure
         // taking "y" coordinate of each piece of figure(each figure consists of 4 pieces)
         // i use "index" to choose a piece of figure; 1 means that i need "y" coordinate of that piece
         return coordinates[index][1];
+    }
+
+    public void setX(int index, int x)
+    {
+        coordinates[index][0] = x;
+    }
+
+    public void setY(int index, int y)
+    {
+        coordinates[index][1] = y;
     }
 
 }
