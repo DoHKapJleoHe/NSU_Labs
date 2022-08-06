@@ -49,7 +49,8 @@ public class Figure
         var r = new Random();
         int x = Math.abs(r.nextInt()) % 7 + 1;
 
-
+        Shapes[] values = Shapes.values();
+        setFigure(values[x]);
     }
 
     public Shapes getFigure()

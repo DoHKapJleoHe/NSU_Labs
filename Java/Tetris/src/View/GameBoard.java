@@ -87,7 +87,7 @@ public class GameBoard extends JPanel
     public void newFigure()
     {
         currentFigure = new Figure(); // creating new figure to drop
-        currentFigure.setFigure(Figure.Shapes.Lineshape);
+        currentFigure.setRandomFigure();
 
         curX = BOARD_WIDTH / 2;
         curY = BOARD_HEIGHT - 2;
