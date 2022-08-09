@@ -22,9 +22,26 @@ public class GameBoard extends JPanel
     private int curY = 0;
     private GameController gameController;
 
-    public GameBoard(GameController gc)
+    public int getCurX()
     {
-        this.gameController = gc;
+        return curX;
+    }
+
+    public int getCurY() {
+        return curY;
+    }
+
+    public void setCurX(int curX) {
+        this.curX = curX;
+    }
+
+    public void setCurY(int curY) {
+        this.curY = curY;
+    }
+
+    public GameBoard()
+    {
+        gameController = new GameController(this);
         setFocusable(true);
 
         // each element of this array is a figure(mb it is correct to say that each element is a piece of a figure)
@@ -107,7 +124,7 @@ public class GameBoard extends JPanel
             int x = curX + currentFigure.pieceX(i);
             int y = curY - currentFigure.pieceY(i);
 
-            if (x <= 0 || x >= BOARD_WIDTH || y <= 0 || y >= BOARD_HEIGHT)
+            if (x < 0 || x >= BOARD_WIDTH || y <= 0 || y >= BOARD_HEIGHT)
                 return false;
             if(figureAt(x, y - 1) != Figure.Shapes.Noshape)
                 return false;
@@ -135,7 +152,7 @@ public class GameBoard extends JPanel
 
     }
 
-    private Figure.Shapes figureAt(int x, int y)
+    public Figure.Shapes figureAt(int x, int y)
     {
         return board[x + BOARD_WIDTH * y];
     }
@@ -210,8 +227,40 @@ public class GameBoard extends JPanel
             int code = e.getKeyCode();
 
             switch (code) {
-                case KeyEvent.VK_LEFT -> curX -= 1;
-                case KeyEvent.VK_RIGHT -> curX += 1;
+                case KeyEvent.VK_LEFT -> {
+                    int check = 0;
+                    if (tryToMove(currentFigure, curX, curY)) {
+                        for (int i = 0; i < 4; i++) {
+                            int x = curX + currentFigure.pieceX(i);
+                            int y = curY - currentFigure.pieceY(i);
+
+                            check++;
+
+                            if (figureAt(x - 1, y) != Figure.Shapes.Noshape)
+                                break;
+                        }
+                    }
+                    if (check == 4)
+                        gameController.moveLeft(curX);
+                    check = 0;
+                }
+                case KeyEvent.VK_RIGHT -> {
+                    int check1 = 0;
+                    if (tryToMove(currentFigure, curX, curY)) {
+                        for (int i = 0; i < 4; i++) {
+                            int x = curX + currentFigure.pieceX(i);
+                            int y = curY - currentFigure.pieceY(i);
+
+                            check1++;
+
+                            if (figureAt(x + 1, y) != Figure.Shapes.Noshape)
+                                break;
+                        }
+                    }
+                    if (check1 == 4)
+                        gameController.moveRight(curX);
+                    check1 = 0;
+                }
             }
         }
     }

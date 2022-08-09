@@ -47,9 +47,7 @@ public class MenuView extends JFrame // this class will inherit all functions of
         startButton.addActionListener(e -> {
             this.setVisible(false);
 
-            GameController gc = new GameController();
-
-            Tetris tetris = new Tetris(gc);
+            Tetris tetris = new Tetris();
             tetris.setLocationRelativeTo(null);
             tetris.setVisible(true);
         });
