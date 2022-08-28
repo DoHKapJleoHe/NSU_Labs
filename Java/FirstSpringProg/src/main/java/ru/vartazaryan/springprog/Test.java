@@ -10,9 +10,10 @@ public class Test
                 "applicationContext.xml"
         );
 
-        Music bean = context.getBean("musicBean", Music.class);
+        //Music bean = context.getBean("musicBean", Music.class);
+        //Player newPlayer = new Player(bean);
 
-        Player newPlayer = new Player(bean);
+        Player newPlayer = context.getBean("player", Player.class); // dependency injection
         newPlayer.playMusic();
 
         context.close();

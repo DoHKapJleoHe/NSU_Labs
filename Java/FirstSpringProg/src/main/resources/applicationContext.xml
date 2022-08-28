@@ -11,4 +11,10 @@
           class="ru.vartazaryan.springprog.ClassicalMusic">
     </bean>
 
+    <bean id="player"
+          class="ru.vartazaryan.springprog.Player">
+          <constructor-arg ref="musicBean"/>
+    </bean>
+
+
 </beans>
