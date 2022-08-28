@@ -10,9 +10,10 @@ public class Test
                 "applicationContext.xml"
         );
 
-        FirstBean bean = context.getBean("testBean", FirstBean.class);
+        Music bean = context.getBean("musicBean", Music.class);
 
-        System.out.println(bean.getName());
+        Player newPlayer = new Player(bean);
+        newPlayer.playMusic();
 
         context.close();
     }
