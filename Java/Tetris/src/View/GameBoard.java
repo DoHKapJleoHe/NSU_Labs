@@ -261,6 +261,13 @@ public class GameBoard extends JPanel
                         gameController.moveRight(curX);
                     check1 = 0;
                 }
+                case KeyEvent.VK_UP -> {
+                    Figure newFigure;
+
+                    if(tryToMove(newFigure = gameController.rotateRight(currentFigure), curX, curY))
+                        currentFigure = newFigure;
+
+                }
             }
         }
     }

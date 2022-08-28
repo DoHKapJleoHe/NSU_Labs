@@ -14,9 +14,20 @@ public class GameController
         this.board = gb;
     }
 
-    public void rotateRight(Figure figure)
+    public Figure rotateRight(Figure figure)
     {
+        if(figure.getFigure() == Figure.Shapes.Squareshape)
+            return figure;
 
+        var result = new Figure();
+
+        for (int i = 0; i < 4; i++)
+        {
+            result.setX(i, result.pieceY(i));
+            result.setY(i, -result.pieceX(i));
+        }
+
+        return result;
     }
 
     public void rotateLeft()
