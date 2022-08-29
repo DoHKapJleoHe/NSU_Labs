@@ -2,6 +2,9 @@ package ru.vartazaryan.springprog;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Test
 {
     public static void main(String[] args)
@@ -14,8 +17,7 @@ public class Test
         //Player newPlayer = new Player(bean);
 
         Player newPlayer = context.getBean("player", Player.class); // dependency injection
-        System.out.println("Player name: " + newPlayer.getName());
-        System.out.println("Volume: " + newPlayer.getVolume());
+
         newPlayer.playMusic();
 
         context.close();

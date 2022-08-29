@@ -1,42 +1,52 @@
 package ru.vartazaryan.springprog;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player
 {
-    private Music music;
+    private List<Music> musicList = new ArrayList<>();
+
     private String name;
     private int volume;
 
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
-    public int getVolume() {
+    public int getVolume()
+    {
         return volume;
     }
 
-    public void setVolume(int volume) {
+    public void setVolume(int volume)
+    {
         this.volume = volume;
     }
 
     // IoC
-    public Player(Music newMusic)
+    public Player(List<Music> newMusicList)
     {
-        this.music = newMusic;
+        this.musicList = newMusicList;
     }
 
     public Player() {}
 
-    public void setMusic(Music music)
+    public void setMusic(List<Music> musicList)
     {
-        this.music = music;
+        this.musicList = musicList;
     }
 
     public void playMusic()
     {
-        System.out.println("Playing: " + music.getSong());
+        for (Music music : musicList) {
+            System.out.println("Playing: " + music.getSong());
+        }
     }
 }
