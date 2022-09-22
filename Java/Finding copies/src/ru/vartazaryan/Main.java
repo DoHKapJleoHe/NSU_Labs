@@ -7,25 +7,12 @@ public class Main
     public static void main(String[] args)
     {
         Receiver receiver = new Receiver();
-        receiver.run();
-        try
-        {
-            Thread.sleep(1000);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
+        Broadcaster broadcaster = new Broadcaster();
 
-        BroadcastingClient publisher = new BroadcastingClient();
-        try
-        {
-            publisher.broadcast("Hi!");
-            publisher.broadcast("I am John!");
-            publisher.broadcast("Hehe");
+        Thread receiverThread = new Thread(receiver);
+        receiverThread.start();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Thread broadcasterThread = new Thread(broadcaster);
+        broadcasterThread.start();
     }
 }

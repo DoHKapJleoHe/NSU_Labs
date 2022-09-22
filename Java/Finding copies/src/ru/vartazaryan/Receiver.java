@@ -3,21 +3,22 @@ package ru.vartazaryan;
 import java.io.IOException;
 import java.net.*;
 
-public class Receiver extends Thread
+public class Receiver implements Runnable
 {
     protected MulticastSocket socket = null;
     protected byte[] buf = new byte[256];
 
+    @Override
     public void run()
     {
         try {
-            socket = new MulticastSocket(4446);
+            int port = 1234;
+            String address = "230.0.0.0";
 
-            InetAddress inetAddress = InetAddress.getByName("230.0.0.0");
-            InetSocketAddress group = new InetSocketAddress(inetAddress, socket.getPort());
-            NetworkInterface netInf = NetworkInterface.getByName("bge0");
+            socket = new MulticastSocket(port);
+            InetAddress group = InetAddress.getByName(address);
 
-            socket.joinGroup(group, netInf);
+            socket.joinGroup(group);
             while (true) {
                 System.out.println("Waiting.....");
 
@@ -25,12 +26,13 @@ public class Receiver extends Thread
                 socket.receive(packet);
 
                 String res = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Received: " + res);
-                if ("end".equals(res)) {
+                System.out.println("Received: " + res + "from" + group.getHostAddress());
+                if ("end".equals(res))
+                {
                     break;
                 }
             }
-            socket.leaveGroup(group, netInf);
+            socket.leaveGroup(group);
             socket.close();
         }
         catch(Exception e)
