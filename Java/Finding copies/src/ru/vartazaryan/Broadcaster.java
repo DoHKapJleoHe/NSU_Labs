@@ -8,6 +8,7 @@ public class Broadcaster implements Runnable
     protected MulticastSocket multicastSocket;
     protected InetAddress group;
     protected byte[] buf;
+    private Boolean isFinished = false;
 
     @Override
     public void run()
@@ -20,13 +21,26 @@ public class Broadcaster implements Runnable
             multicastSocket = new MulticastSocket(port);
             group = InetAddress.getByName(address);
 
-            buf = "end".getBytes(StandardCharsets.UTF_8);
-            DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 4446);
-            multicastSocket.send(packet);
+            while(!isFinished)
+            {
+                buf = "hi".getBytes(StandardCharsets.UTF_8);
+                DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 1234);
+                multicastSocket.send(packet);
+                Thread.sleep(2000);
+            }
+
+            multicastSocket.leaveGroup(group);
+            multicastSocket.close();
         }
         catch (Exception e)
         {
             e.printStackTrace();
         }
     }
+
+    /*public void stop()
+    {
+        isFinished = true;
+        Thread.interrupted();
+    }*/
 }
