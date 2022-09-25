@@ -2,7 +2,7 @@
 #include<math.h>
 #include<stdbool.h>
 #include<mpi.h>
-//#include<pthread.h>
+#include<pthread.h>
 
 #define TASKS_IN_LIST 1000
 #define L 1500
