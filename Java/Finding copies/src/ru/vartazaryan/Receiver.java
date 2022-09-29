@@ -4,16 +4,20 @@ import java.io.IOException;
 import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Receiver implements Runnable
 {
     protected MulticastSocket socket = null;
     protected byte[] buf = new byte[256];
-    public List<String> ips = new ArrayList<String>();
+    private List<String> ips = new ArrayList<String>();
 
     @Override
     public void run()
     {
+        /*List<String> tmp = new ArrayList<String>();
+        ips = new CopyOnWriteArrayList<>(tmp);*/
+
         try {
             int port = 1234;
             String address = "230.0.0.0";
@@ -29,13 +33,13 @@ public class Receiver implements Runnable
                 socket.receive(packet);
 
                 String res = new String(packet.getData(), 0, packet.getLength());
-                System.out.println("Received: " + res + " from " + packet.getAddress());
+                System.out.println("Received: " + res + " from " + packet.getAddress() + " " + packet.getPort());
 
                 String packetPort = String.valueOf(packet.getPort());
                 String packetAddress = String.valueOf(packet.getAddress());
                 String fullAddress = packetAddress + " " + packetPort;
 
-                if (!"end".equals(res))
+                /*if (!"end".equals(res))
                 {
                     if(ips.size() == 0)
                         ips.add(fullAddress);
@@ -57,7 +61,7 @@ public class Receiver implements Runnable
                     {
                         System.out.println(i);
                     }
-                }
+                }*/
                 if ("end".equals(res))
                 {
                     ips.remove(fullAddress);

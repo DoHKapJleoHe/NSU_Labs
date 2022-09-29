@@ -15,7 +15,7 @@ public class Broadcaster implements Runnable
     {
         try
         {
-            int port = 1234;
+            int port = 1417;
             String address = "230.0.0.0";
 
             multicastSocket = new MulticastSocket(port);
@@ -26,7 +26,7 @@ public class Broadcaster implements Runnable
                 buf = "hi".getBytes(StandardCharsets.UTF_8);
                 DatagramPacket packet = new DatagramPacket(buf, buf.length, group, 1234);
                 multicastSocket.send(packet);
-                Thread.sleep(2000);
+                Thread.sleep(5000);
             }
 
             multicastSocket.leaveGroup(group);
