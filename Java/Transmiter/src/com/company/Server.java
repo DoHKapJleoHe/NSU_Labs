@@ -6,7 +6,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
 
-public class Server extends IOException
+public class Server
 {
     private int port;
 
@@ -23,8 +23,6 @@ public class Server extends IOException
 
         Scanner in = new Scanner(clientSocket.getInputStream());
         PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
-
-
 
 
         clientSocket.close();
