@@ -4,7 +4,7 @@
 #include<pthread.h>
 #include<math.h>
 
-#define NUMBER_OF_STEPS 1000
+#define NUMBER_OF_STEPS 20000000
 
 typedef struct Params{
     int numOfThreads;
