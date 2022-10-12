@@ -1,12 +1,8 @@
 package com.company.server;
 
-import com.company.client.Client;
-
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
-
+import java.nio.ByteBuffer;
 
 public class Server implements Runnable
 {
@@ -72,22 +68,26 @@ public class Server implements Runnable
     private int getFileData(DataInputStream inputStream, long length) throws IOException {
         System.out.println("Server started copying data...");
         int readByte = 0;
+        int totalReadBytes = 0;
+
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
 
         while (inputStream.available() > 0)
         {
             System.out.println("Copying...");
-            readByte += inputStream.read(buffer);
-            writer.write(buffer);
+            readByte = inputStream.read(buffer);
+            totalReadBytes += readByte;
+            writer.write(buffer, 0, readByte);
 
-            if (readByte == length)
+            if (totalReadBytes >= length)
             {
                 break;
             }
+
         }
         writer.close();
 
-        return readByte;
+        return totalReadBytes;
     }
 
     private boolean isFileName(String name)

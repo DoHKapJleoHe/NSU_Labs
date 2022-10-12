@@ -29,20 +29,21 @@ public class Client
             out.writeLong(file.length());
 
             out.writeUTF(textToSend);
-            out.flush();
 
-            out.writeInt((int)file.length());
-            out.flush();
+            //out.writeInt((int)file.length());
 
             FileInputStream reader = new FileInputStream(file.getPath());
             int sendBytes = 0;
+            int totalSendBytes = 0;
+
             while (reader.available() > 0)
             {
-                sendBytes += reader.read(buf);
-                out.write(buf);
+                sendBytes = reader.read(buf);
+                totalSendBytes += sendBytes;
+                out.write(buf, 0, sendBytes);
             }
             int bytesFromServer = in.readInt();
-            System.out.println("Was send " + sendBytes + " bytes");
+            System.out.println("Was send " + totalSendBytes + " bytes");
             System.out.println("Server got " + bytesFromServer + " bytes");
         }
         catch (Exception e)
