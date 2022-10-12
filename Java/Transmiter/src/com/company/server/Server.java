@@ -31,9 +31,9 @@ public class Server implements Runnable
             DataOutputStream out = new DataOutputStream(client.getOutputStream());
 
             String entryText;
-            int length = 0;
-
-            length = in.readInt();
+            long length = 0L;
+            length = in.readLong();
+            System.out.println("File length = " + length + " bytes");
 
             entryText = in.readUTF();
 
@@ -54,7 +54,7 @@ public class Server implements Runnable
             }
 
             int readByte = 0;
-            readByte = getFileData(in);
+            readByte = getFileData(in, length);
             out.writeInt(readByte);
             System.out.println("Server finished copying data!");
             in.close();
@@ -69,7 +69,7 @@ public class Server implements Runnable
 
     }
 
-    private int getFileData(DataInputStream inputStream) throws IOException {
+    private int getFileData(DataInputStream inputStream, long length) throws IOException {
         System.out.println("Server started copying data...");
         int readByte = 0;
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
@@ -79,6 +79,11 @@ public class Server implements Runnable
             System.out.println("Copying...");
             readByte += inputStream.read(buffer);
             writer.write(buffer);
+
+            if (readByte == length)
+            {
+                break;
+            }
         }
         writer.close();
 
@@ -87,15 +92,7 @@ public class Server implements Runnable
 
     private boolean isFileName(String name)
     {
-        if(name.contains("File name :"))
-        {
-            System.out.println("Server got file!");
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return name.contains("File name :");
     }
 }
 

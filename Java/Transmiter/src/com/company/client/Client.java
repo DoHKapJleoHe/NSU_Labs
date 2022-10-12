@@ -9,7 +9,7 @@ public class Client
 {
     private final String path;
     private final int serverPort;
-    private byte[] buf = new byte[4096];
+    private final byte[] buf = new byte[4096];
 
     public Client(String path, int serverPort)
     {
@@ -25,6 +25,8 @@ public class Client
         {
             File file = new File(path);
             String textToSend = " File name :" + file.getName();
+
+            out.writeLong(file.length());
 
             out.writeUTF(textToSend);
             out.flush();
