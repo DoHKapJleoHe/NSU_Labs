@@ -1,5 +1,7 @@
 package com.company.server;
 
+import com.company.client.Client;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,14 +10,14 @@ import java.nio.charset.StandardCharsets;
 
 public class Server implements Runnable
 {
-    private final int port;
     private final byte[] buffer = new byte[4096];
     private String pathName;
     private File newFile = null;
+    private Socket client;
 
-    public Server(int port)
+    public Server(Socket client)
     {
-        this.port = port;
+        this.client = client;
     }
 
     @Override
@@ -23,17 +25,10 @@ public class Server implements Runnable
     {
         try
         {
-            ServerSocket serverSocket = new ServerSocket(port); // <1000 are sys ports
-
-            System.out.println("Waiting for client...");
-
-            Socket clientSocket = serverSocket.accept(); // waiting for client
-            System.out.println("Client was accepted!");
-
             //Initializing chanel for reading from socket
-            DataInputStream in = new DataInputStream(clientSocket.getInputStream());
+            DataInputStream in = new DataInputStream(client.getInputStream());
             //Initializing chanel for writing in socket
-            DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());
+            DataOutputStream out = new DataOutputStream(client.getOutputStream());
 
             String entryText;
             int length = 0;
@@ -62,8 +57,7 @@ public class Server implements Runnable
             in.close();
             out.close();
 
-            clientSocket.close();
-            serverSocket.close();
+            client.close();
         }
         catch (Exception e)
         {
@@ -84,7 +78,7 @@ public class Server implements Runnable
 
             writer.write(buffer);
         }
-
+        writer.close();
     }
 
     private boolean isFileName(String name)
