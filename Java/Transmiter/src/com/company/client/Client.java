@@ -33,11 +33,15 @@ public class Client
             out.flush();
 
             FileInputStream reader = new FileInputStream(file.getPath());
+            int sendBytes = 0;
             while (reader.available() > 0)
             {
-                reader.read(buf);
+                sendBytes += reader.read(buf);
                 out.write(buf);
             }
+            int bytesFromServer = in.readInt();
+            System.out.println("Was send " + sendBytes + " bytes");
+            System.out.println("Server got " + bytesFromServer + " bytes");
         }
         catch (Exception e)
         {

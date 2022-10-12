@@ -33,6 +33,8 @@ public class Server implements Runnable
             String entryText;
             int length = 0;
 
+            length = in.readInt();
+
             entryText = in.readUTF();
 
             if(isFileName(entryText))
@@ -51,9 +53,10 @@ public class Server implements Runnable
                 }
             }
 
-            getFileData(in);
+            int readByte = 0;
+            readByte = getFileData(in);
+            out.writeInt(readByte);
             System.out.println("Server finished copying data!");
-
             in.close();
             out.close();
 
@@ -66,19 +69,20 @@ public class Server implements Runnable
 
     }
 
-    private void getFileData(DataInputStream inputStream) throws IOException {
+    private int getFileData(DataInputStream inputStream) throws IOException {
         System.out.println("Server started copying data...");
-
+        int readByte = 0;
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
 
         while (inputStream.available() > 0)
         {
             System.out.println("Copying...");
-            inputStream.read(buffer);
-
+            readByte += inputStream.read(buffer);
             writer.write(buffer);
         }
         writer.close();
+
+        return readByte;
     }
 
     private boolean isFileName(String name)
