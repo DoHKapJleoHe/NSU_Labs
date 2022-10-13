@@ -71,20 +71,21 @@ public class Server implements Runnable
 
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
 
-        while (inputStream.available() > 0)
+        /*inputStream.available() > 0*/
+        while ((readByte = inputStream.read(buffer)) < length)
         {
             long startTime = System.nanoTime();
             double curSpeed, totalSpeed;
 
-            readByte = inputStream.read(buffer);
+            //readByte = inputStream.read(buffer);
             totalReadBytes += readByte;
             writer.write(buffer, 0, readByte);
 
-            if(startTime > 3000000000L)
+            /*if(startTime > 3000000000L)
             {
                 curSpeed = readByte / 3;
 
-            }
+            }*/
 
             if (totalReadBytes >= length)
             {

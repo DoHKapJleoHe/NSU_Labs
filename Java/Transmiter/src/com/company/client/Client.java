@@ -40,7 +40,7 @@ public class Client
                 sendBytes = reader.read(buf);
                 totalSendBytes += sendBytes;
                 out.write(buf, 0, sendBytes);
-                //out.flush();
+
             }
 
             int bytesFromServer = in.readInt();
