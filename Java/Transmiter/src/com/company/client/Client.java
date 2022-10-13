@@ -20,19 +20,18 @@ public class Client
     public void run() throws IOException
     {
         Socket clientSocket = new Socket("127.0.0.1", serverPort);
-        try(    DataInputStream in = new DataInputStream(clientSocket.getInputStream()); // to send smth
+        // Below resources to transfer data
+        try(    DataInputStream in = new DataInputStream(clientSocket.getInputStream());
                 DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());)
         {
-            File file = new File(path);
+            File file = new File(path); // file i want to send
             String textToSend = " File name :" + file.getName();
 
-            out.writeLong(file.length());
+            out.writeLong(file.length());// sending length of file
 
-            out.writeUTF(textToSend);
+            out.writeUTF(textToSend); // sending name of the file
 
-            //out.writeInt((int)file.length());
-
-            FileInputStream reader = new FileInputStream(file.getPath());
+            FileInputStream reader = new FileInputStream(file.getPath()); // stream to read data from file
             int sendBytes = 0;
             int totalSendBytes = 0;
 
@@ -41,7 +40,9 @@ public class Client
                 sendBytes = reader.read(buf);
                 totalSendBytes += sendBytes;
                 out.write(buf, 0, sendBytes);
+                //out.flush();
             }
+
             int bytesFromServer = in.readInt();
             System.out.println("Was send " + totalSendBytes + " bytes");
             System.out.println("Server got " + bytesFromServer + " bytes");

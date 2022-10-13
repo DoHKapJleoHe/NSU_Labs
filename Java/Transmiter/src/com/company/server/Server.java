@@ -9,7 +9,7 @@ public class Server implements Runnable
     private final byte[] buffer = new byte[4096];
     private String pathName;
     private File newFile = null;
-    private Socket client;
+    private final Socket client;
 
     public Server(Socket client)
     {
@@ -52,7 +52,6 @@ public class Server implements Runnable
             int readByte = 0;
             readByte = getFileData(in, length);
             out.writeInt(readByte);
-            System.out.println("Server finished copying data!");
             in.close();
             out.close();
 
@@ -74,10 +73,18 @@ public class Server implements Runnable
 
         while (inputStream.available() > 0)
         {
-            System.out.println("Copying...");
+            long startTime = System.nanoTime();
+            double curSpeed, totalSpeed;
+
             readByte = inputStream.read(buffer);
             totalReadBytes += readByte;
             writer.write(buffer, 0, readByte);
+
+            if(startTime > 3000000000L)
+            {
+                curSpeed = readByte / 3;
+
+            }
 
             if (totalReadBytes >= length)
             {
@@ -86,6 +93,8 @@ public class Server implements Runnable
 
         }
         writer.close();
+
+        System.out.println("Server finished copying data!");
 
         return totalReadBytes;
     }
