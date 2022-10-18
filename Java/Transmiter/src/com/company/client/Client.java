@@ -35,7 +35,7 @@ public class Client
             int sendBytes = 0;
             int totalSendBytes = 0;
 
-            while (reader.available() > 0)
+            while (reader.available() > 0) // sending file data
             {
                 sendBytes = reader.read(buf);
                 totalSendBytes += sendBytes;
@@ -43,9 +43,7 @@ public class Client
 
             }
 
-            int bytesFromServer = in.readInt();
-            System.out.println("Was send " + totalSendBytes + " bytes");
-            System.out.println("Server got " + bytesFromServer + " bytes");
+            System.out.println("Server's answer: " + in.readUTF());
         }
         catch (Exception e)
         {

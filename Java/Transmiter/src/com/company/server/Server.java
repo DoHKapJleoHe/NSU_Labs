@@ -55,7 +55,10 @@ public class Server implements Runnable
 
             int readByte = 0;
             readByte = getFileData(in, length);
-            out.writeInt(readByte);
+
+            if(readByte == length)
+                out.writeUTF("All data received!");
+
             in.close();
             out.close();
 
@@ -76,14 +79,24 @@ public class Server implements Runnable
 
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
 
+        long curSpeed, totalSpeed;
+        long threeSeconds = 3000000000L;
+        long fullTime = System.nanoTime();
+
         while ((readByte = inputStream.read(buffer)) < length)
         {
-            long startTime = System.nanoTime();
-            double curSpeed, totalSpeed;
+            long startTime = System.nanoTime(); // ???
 
             totalReadBytes += readByte;
             writer.write(buffer, 0, readByte);
 
+            if(startTime / threeSeconds == 0)
+            {
+                curSpeed = readByte / 3;
+                System.out.println("Current speed = " + curSpeed);
+
+                startTime = 0;
+            }
             if (totalReadBytes >= length) {break;}
         }
 
