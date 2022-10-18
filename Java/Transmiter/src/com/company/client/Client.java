@@ -25,7 +25,7 @@ public class Client
                 DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream());)
         {
             File file = new File(path); // file i want to send
-            String textToSend = " File name :" + file.getName();
+            String textToSend = file.getName();
 
             out.writeLong(file.length());// sending length of file
 

@@ -7,9 +7,10 @@ import java.nio.ByteBuffer;
 public class Server implements Runnable
 {
     private final byte[] buffer = new byte[4096];
-    private String pathName;
+    private String pathName = "C:\\Users\\eduar\\Desktop\\ForTCP\\";
     private File newFile = null;
     private final Socket client;
+    private final String cut = "File name";
 
     public Server(Socket client)
     {
@@ -28,25 +29,28 @@ public class Server implements Runnable
 
             String entryText;
             long length = 0L;
+
             length = in.readLong();
             System.out.println("File length = " + length + " bytes");
 
             entryText = in.readUTF();
-
-            if(isFileName(entryText))
+            String fileName = entryText;
+            String currentPathName = pathName + fileName;
+            try
             {
-                String fileName = entryText.substring(12);
-                String currentPathName = "C:\\Users\\eduar\\Desktop\\ForTCP\\" + fileName;
-                pathName = currentPathName;
-                try
+                if(!fileNameAlreadyExist(currentPathName))
                 {
                     newFile = new File(currentPathName);
                     newFile.createNewFile();
                 }
-                catch (Exception e)
+                else
                 {
-                    e.printStackTrace();
+                    System.out.println("Bro, there is file like yours...");
                 }
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
             }
 
             int readByte = 0;
@@ -64,45 +68,36 @@ public class Server implements Runnable
 
     }
 
-    private int getFileData(DataInputStream inputStream, long length) throws IOException {
+    private int getFileData(DataInputStream inputStream, long length) throws IOException
+    {
         System.out.println("Server started copying data...");
         int readByte = 0;
         int totalReadBytes = 0;
 
         FileOutputStream writer = new FileOutputStream(newFile.getPath());
 
-        /*inputStream.available() > 0*/
         while ((readByte = inputStream.read(buffer)) < length)
         {
             long startTime = System.nanoTime();
             double curSpeed, totalSpeed;
 
-            //readByte = inputStream.read(buffer);
             totalReadBytes += readByte;
             writer.write(buffer, 0, readByte);
 
-            /*if(startTime > 3000000000L)
-            {
-                curSpeed = readByte / 3;
-
-            }*/
-
-            if (totalReadBytes >= length)
-            {
-                break;
-            }
-
+            if (totalReadBytes >= length) {break;}
         }
-        writer.close();
 
+        writer.close();
         System.out.println("Server finished copying data!");
 
         return totalReadBytes;
     }
 
-    private boolean isFileName(String name)
+    private boolean fileNameAlreadyExist(String name)
     {
-        return name.contains("File name :");
+        File file = new File(pathName + name);
+
+        return file.exists();
     }
 }
 
