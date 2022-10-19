@@ -47,6 +47,8 @@ public class Client
         }
         catch (Exception e)
         {
+
+            System.out.println("An error occurred while sending a file!");
             e.printStackTrace();
         }
 

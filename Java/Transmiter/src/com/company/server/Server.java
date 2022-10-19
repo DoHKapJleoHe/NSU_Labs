@@ -50,6 +50,7 @@ public class Server implements Runnable
             }
             catch (Exception e)
             {
+                System.out.println("There was an error while creating a new file!");
                 e.printStackTrace();
             }
 
@@ -66,6 +67,7 @@ public class Server implements Runnable
         }
         catch (Exception e)
         {
+            System.out.println("There was an error wile running a server!");
             e.printStackTrace();
         }
 
@@ -81,7 +83,7 @@ public class Server implements Runnable
 
         long curSpeed, totalSpeed;
         long threeSeconds = 3000000000L;
-        long fullTime = System.nanoTime();
+        long fullTimeStart = System.nanoTime();
 
         while ((readByte = inputStream.read(buffer)) < length)
         {
@@ -99,6 +101,8 @@ public class Server implements Runnable
             }
             if (totalReadBytes >= length) {break;}
         }
+        long fullTimeEnd = System.nanoTime();
+        System.out.println("Average speed = " + (totalReadBytes / (fullTimeEnd - fullTimeStart)));
 
         writer.close();
         System.out.println("Server finished copying data!");
