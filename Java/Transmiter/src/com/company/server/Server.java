@@ -7,7 +7,7 @@ import java.nio.ByteBuffer;
 public class Server implements Runnable
 {
     private final byte[] buffer = new byte[4096];
-    private String pathName = "C:\\Users\\eduar\\Desktop\\ForTCP\\";
+    private String pathName = "C:\\Users\\eduar\\Desktop\\uploads\\";
     private File newFile = null;
     private final Socket client;
     private final String cut = "File name";
