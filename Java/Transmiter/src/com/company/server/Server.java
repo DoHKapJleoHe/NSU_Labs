@@ -87,7 +87,7 @@ public class Server implements Runnable
 
         while ((readByte = inputStream.read(buffer)) < length)
         {
-            long startTime = System.nanoTime(); // ???
+            long startTime = System.currentTimeMillis(); // ???
 
             totalReadBytes += readByte;
             writer.write(buffer, 0, readByte);
@@ -101,7 +101,7 @@ public class Server implements Runnable
             }
             if (totalReadBytes >= length) {break;}
         }
-        long fullTimeEnd = System.nanoTime();
+        long fullTimeEnd = System.currentTimeMillis();
         System.out.println("Average speed = " + (totalReadBytes / (fullTimeEnd - fullTimeStart)));
 
         writer.close();

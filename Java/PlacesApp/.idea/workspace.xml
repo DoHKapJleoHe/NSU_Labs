@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="19.10.2022">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/keys.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/client/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/client/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/client/MainClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/client/MainClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/server/Server.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/server/Server.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/server/ServerFabric.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Transmiter/out/production/Transmiter/com/company/server/ServerFabric.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Transmiter/src/com/company/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Transmiter/src/com/company/server/Server.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,6 +45,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
