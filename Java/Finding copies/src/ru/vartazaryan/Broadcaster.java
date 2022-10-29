@@ -20,8 +20,7 @@ public class Broadcaster implements Runnable
 
             multicastSocket = new MulticastSocket(port);
             group = InetAddress.getByName(address);
-            
-            // kill me pls
+           
             while(!isFinished)
             {
                 buf = "hi".getBytes(StandardCharsets.UTF_8);
