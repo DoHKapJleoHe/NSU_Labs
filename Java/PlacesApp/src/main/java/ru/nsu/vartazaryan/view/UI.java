@@ -1,8 +1,13 @@
 package ru.nsu.vartazaryan.view;
 
 import ru.nsu.vartazaryan.controller.Controller;
+import ru.nsu.vartazaryan.controller.Place;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class UI
 {
@@ -26,9 +31,30 @@ public class UI
         textField.setBounds(160, 30, 300, 25);
         frame.add(textField);
 
+        DefaultListModel<String> placeModel = new DefaultListModel<>();
+        JList<String> placeJList = new JList(placeModel);
+        placeJList.setVisible(true);
+        placeJList.setBounds(480, 40, 400, 400);
+        placeJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        frame.add(placeJList);
+
         findButton.addActionListener(e -> {
-            //TODO: make list to collect info from find-function
-            controller.find(textField.getText());
+            //DefaultListModel<Place> placeModel = new DefaultListModel<>();
+            List<Place> placeList;
+            try {
+                placeList = controller.find(textField.getText());
+                for (int i = 0; i < placeList.size(); i++)
+                {
+                    String ful;
+                    ful = placeList.get(i).getName() + placeList.get(i).getLat() + placeList.get(i).getLng();
+                    placeModel.addElement(placeList.get(i).getName()+" "+placeList.get(i).getLat()+" "+placeList.get(i).getLng());
+                }
+            } catch (ExecutionException | InterruptedException ex) {
+                System.out.println("Error while getting list of places!");
+                ex.printStackTrace();
+            }
         });
+
+        //placeJList.addListSelectionListener();
     }
 }

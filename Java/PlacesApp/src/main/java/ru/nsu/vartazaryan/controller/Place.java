@@ -1,8 +1,5 @@
 package ru.nsu.vartazaryan.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Place
 {
     private String lat;
@@ -22,6 +19,10 @@ public class Place
 
     public String getLng() {
         return lng;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override

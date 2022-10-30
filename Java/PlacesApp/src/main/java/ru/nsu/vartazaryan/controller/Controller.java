@@ -11,35 +11,38 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class Controller
 {
     //CompletableFuture<List<String>>
-    public void find(String text)
-    {
-        //CompletableFuture<Void> response = new CompletableFuture<>();
-        var stringURI = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=55da9d34-cfc0-4f3e-82bb-48eb0cd9ef38"
-                                            ,text);
+    public List<Place> find(String text) throws ExecutionException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
+        var stringURI_places = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=55da9d34-cfc0-4f3e-82bb-48eb0cd9ef38", text);
         var request = HttpRequest
                 .newBuilder()
                 .GET()
-                .uri(URI.create(stringURI))
+                .uri(URI.create(stringURI_places))
                 .build();
 
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        CompletableFuture<List<Place>> places = new CompletableFuture<List<Place>>();
+        places = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenApply(this::parsePlace)
-                .thenAccept(System.out::println);
+                .thenApply(this::parsePlace);
 
-       // Place place = parsePlace(response);
+        List<Place> finalList = places.get();
+        /*CompletableFuture<List<Weather>> placesWeather = new CompletableFuture<>();
+        var stringURI_weather = String.format("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=936235de21b90aa0788fb20ec5efe8fa");*/
+
+        return finalList;
     }
 
     private List<Place> parsePlace(String response)
     {
         List<Place> placeList = new ArrayList<>();
-        Gson gsonParser = new Gson();
+
         JsonObject json = JsonParser.parseString(response).getAsJsonObject();
         JsonArray arr = json.get("hits").getAsJsonArray();
 
