@@ -39,15 +39,15 @@ public class UI
         frame.add(placeJList);
 
         findButton.addActionListener(e -> {
-            //DefaultListModel<Place> placeModel = new DefaultListModel<>();
             List<Place> placeList;
-            try {
-                placeList = controller.find(textField.getText());
-                for (int i = 0; i < placeList.size(); i++)
+            try
+            {
+                placeList = controller.findPlaces(textField.getText());
+                for (Place place : placeList)
                 {
                     String ful;
-                    ful = placeList.get(i).getName() + placeList.get(i).getLat() + placeList.get(i).getLng();
-                    placeModel.addElement(placeList.get(i).getName()+" "+placeList.get(i).getLat()+" "+placeList.get(i).getLng());
+                    ful = place.getName() + place.getLat() + place.getLng();
+                    placeModel.addElement(place.getName() + " " + place.getLat() + " " + place.getLng());
                 }
             } catch (ExecutionException | InterruptedException ex) {
                 System.out.println("Error while getting list of places!");
@@ -55,6 +55,15 @@ public class UI
             }
         });
 
-        //placeJList.addListSelectionListener();
+        placeJList.addListSelectionListener(e -> {
+            if(e.getValueIsAdjusting())
+            {
+                int index = e.getLastIndex();
+                String lat, lng, place;
+
+                place = placeModel.getElementAt(index);
+                System.out.println("Place"+"="+place);
+            }
+        });
     }
 }

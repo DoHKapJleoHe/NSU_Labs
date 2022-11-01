@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 public class Controller
 {
     //CompletableFuture<List<String>>
-    public List<Place> find(String text) throws ExecutionException, InterruptedException {
+    public List<Place> findPlaces(String text) throws ExecutionException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         var stringURI_places = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=55da9d34-cfc0-4f3e-82bb-48eb0cd9ef38", text);
@@ -33,8 +33,8 @@ public class Controller
                 .thenApply(this::parsePlace);
 
         List<Place> finalList = places.get();
-        /*CompletableFuture<List<Weather>> placesWeather = new CompletableFuture<>();
-        var stringURI_weather = String.format("https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=936235de21b90aa0788fb20ec5efe8fa");*/
+
+        //findWeather("52.5170365", "13.3888599");
 
         return finalList;
     }
@@ -55,8 +55,26 @@ public class Controller
 
             placeList.add(new Place(lat, lng, name));
         }
-        //Place place = gsonParser.fromJson(json.getAsString(), Place.class);
 
         return placeList;
+    }
+
+    public void findWeather(String lat, String lng)
+    {
+        /*lat = "52.5170365";
+        lng = "13.3888599";*/
+        var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
+
+        HttpClient client = HttpClient.newHttpClient();
+        var request = HttpRequest
+                .newBuilder()
+                .GET()
+                .uri(URI.create(stringURI_weather))
+                .build();
+        CompletableFuture<List<Weather>> placesWeather = new CompletableFuture<>();
+
+        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenAccept(System.out::println);
     }
 }
