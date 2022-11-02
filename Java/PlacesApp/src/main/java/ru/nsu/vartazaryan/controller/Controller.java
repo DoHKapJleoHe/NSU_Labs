@@ -1,6 +1,5 @@
 package ru.nsu.vartazaryan.controller;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -34,8 +33,6 @@ public class Controller
 
         List<Place> finalList = places.get();
 
-        //findWeather("52.5170365", "13.3888599");
-
         return finalList;
     }
 
@@ -59,10 +56,7 @@ public class Controller
         return placeList;
     }
 
-    public void findWeather(String lat, String lng)
-    {
-        /*lat = "52.5170365";
-        lng = "13.3888599";*/
+    public Weather findWeather(String lat, String lng) throws ExecutionException, InterruptedException {
         var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
 
         HttpClient client = HttpClient.newHttpClient();
@@ -71,10 +65,28 @@ public class Controller
                 .GET()
                 .uri(URI.create(stringURI_weather))
                 .build();
-        CompletableFuture<List<Weather>> placesWeather = new CompletableFuture<>();
+        CompletableFuture<Weather> placeWeather = new CompletableFuture<>();
 
-        client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        placeWeather = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenAccept(System.out::println);
+                .thenApply(this::parseWeather);
+
+        return placeWeather.get();
+    }
+
+    private Weather parseWeather(String response)
+    {
+
+
+        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+        JsonArray arr = json.get("weather").getAsJsonArray();
+
+        String main, descr;
+        main = arr.get(0).getAsJsonObject().get("main").toString();
+        descr = arr.get(0).getAsJsonObject().get("description").toString();
+
+        Weather weather = new Weather(main, descr);
+
+        return weather;
     }
 }

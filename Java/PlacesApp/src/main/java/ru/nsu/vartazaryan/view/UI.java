@@ -60,9 +60,22 @@ public class UI
             {
                 int index = e.getLastIndex();
                 String lat, lng, place;
+                String[] coords = new String[3];
 
                 place = placeModel.getElementAt(index);
-                System.out.println("Place"+"="+place);
+                //System.out.println("Place"+"="+place);
+                coords = place.split(" ");
+                lat = coords[1];
+                lng = coords[2];
+
+                try
+                {
+                    controller.findWeather(lat, lng);
+                }
+                catch (ExecutionException | InterruptedException ex)
+                {
+                    ex.printStackTrace();
+                }
             }
         });
     }
