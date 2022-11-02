@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="01.11.2022">
+    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="02.11.2022">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Weather.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Weather.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/keys.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -129,7 +130,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667299265287</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="02.11.2022">
+      <created>1667383144272</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667383144272</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -155,6 +163,7 @@
     <MESSAGE value="29.10.2022" />
     <MESSAGE value="31.10.2022" />
     <MESSAGE value="01.11.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="01.11.2022" />
+    <MESSAGE value="02.11.2022" />
+    <option name="LAST_COMMIT_MESSAGE" value="02.11.2022" />
   </component>
 </project>

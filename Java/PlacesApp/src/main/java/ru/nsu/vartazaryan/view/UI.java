@@ -2,6 +2,7 @@ package ru.nsu.vartazaryan.view;
 
 import ru.nsu.vartazaryan.controller.Controller;
 import ru.nsu.vartazaryan.controller.Place;
+import ru.nsu.vartazaryan.controller.Weather;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -34,9 +35,14 @@ public class UI
         DefaultListModel<String> placeModel = new DefaultListModel<>();
         JList<String> placeJList = new JList(placeModel);
         placeJList.setVisible(true);
-        placeJList.setBounds(480, 40, 400, 400);
+        placeJList.setBounds(480, 30, 400, 300);
         placeJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         frame.add(placeJList);
+
+        JLabel weatherLabel = new JLabel("Weather");
+        weatherLabel.setBounds(480, 340, 400, 15);
+        weatherLabel.setVisible(true);
+        frame.add(weatherLabel);
 
         findButton.addActionListener(e -> {
             List<Place> placeList;
@@ -68,9 +74,12 @@ public class UI
                 lat = coords[1];
                 lng = coords[2];
 
+                Weather weather;
+
                 try
                 {
-                    controller.findWeather(lat, lng);
+                    weather = controller.findWeather(lat, lng);
+                    weatherLabel.setText(weather.getMain() + " " + weather.getDescription());
                 }
                 catch (ExecutionException | InterruptedException ex)
                 {

@@ -13,6 +13,14 @@ public class Weather
         this.description = description;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public String getMain() {
+        return main;
+    }
+
     @Override
     public String toString() {
         return "Weather{" +
