@@ -45,16 +45,22 @@ public class UI
         frame.add(weatherLabel);
 
         findButton.addActionListener(e -> {
-            List<Place> placeList;
             try
             {
-                placeList = controller.findPlaces(textField.getText());
-                for (Place place : placeList)
+                controller.findPlaces(textField.getText()).thenAccept(places -> SwingUtilities.invokeLater(() -> {
+                    for (Place place : places)
+                    {
+                        String ful;
+                        ful = place.getProp();
+                        placeModel.addElement(ful);
+                    }
+                }));
+                /*for (Place place : placeList)
                 {
                     String ful;
                     ful = place.getName() + place.getLat() + place.getLng();
                     placeModel.addElement(place.getName() + " " + place.getLat() + " " + place.getLng());
-                }
+                }*/
             } catch (ExecutionException | InterruptedException ex) {
                 System.out.println("Error while getting list of places!");
                 ex.printStackTrace();
@@ -69,7 +75,6 @@ public class UI
                 String[] coords = new String[3];
 
                 place = placeModel.getElementAt(index);
-                //System.out.println("Place"+"="+place);
                 coords = place.split(" ");
                 lat = coords[1];
                 lng = coords[2];

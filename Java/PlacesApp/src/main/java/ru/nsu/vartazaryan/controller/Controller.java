@@ -15,8 +15,7 @@ import java.util.concurrent.ExecutionException;
 
 public class Controller
 {
-    //CompletableFuture<List<String>>
-    public List<Place> findPlaces(String text) throws ExecutionException, InterruptedException {
+    public CompletableFuture<List<Place>> findPlaces(String text) throws ExecutionException, InterruptedException {
         HttpClient client = HttpClient.newHttpClient();
 
         var stringURI_places = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=55da9d34-cfc0-4f3e-82bb-48eb0cd9ef38", text);
@@ -31,9 +30,7 @@ public class Controller
                 .thenApply(HttpResponse::body)
                 .thenApply(this::parsePlace);
 
-        List<Place> finalList = places.get();
-
-        return finalList;
+        return places;
     }
 
     private List<Place> parsePlace(String response)
@@ -90,5 +87,8 @@ public class Controller
         return weather;
     }
 
-    public void 
+    public void getInterestingPlaces()
+    {
+
+    }
 }
