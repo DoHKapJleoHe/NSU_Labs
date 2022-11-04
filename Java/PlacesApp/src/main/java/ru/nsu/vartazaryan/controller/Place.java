@@ -15,7 +15,7 @@ public class Place
 
     public String getProp()
     {
-        return name+" "+lat+" "+lng;
+        return name+" "+"lat="+" "+lat+" "+"lng="+" "+lng;
     }
 
     public String getLat() {

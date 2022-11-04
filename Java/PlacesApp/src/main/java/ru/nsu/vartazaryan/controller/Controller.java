@@ -53,7 +53,8 @@ public class Controller
         return placeList;
     }
 
-    public Weather findWeather(String lat, String lng) throws ExecutionException, InterruptedException {
+    public CompletableFuture<Weather>  findWeather(String lat, String lng) throws ExecutionException, InterruptedException
+    {
         var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
 
         HttpClient client = HttpClient.newHttpClient();
@@ -68,7 +69,7 @@ public class Controller
                 .thenApply(HttpResponse::body)
                 .thenApply(this::parseWeather);
 
-        return placeWeather.get();
+        return placeWeather;
     }
 
     private Weather parseWeather(String response)

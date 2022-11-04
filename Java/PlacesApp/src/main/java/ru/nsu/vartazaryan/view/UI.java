@@ -5,9 +5,6 @@ import ru.nsu.vartazaryan.controller.Place;
 import ru.nsu.vartazaryan.controller.Weather;
 
 import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class UI
@@ -55,12 +52,6 @@ public class UI
                         placeModel.addElement(ful);
                     }
                 }));
-                /*for (Place place : placeList)
-                {
-                    String ful;
-                    ful = place.getName() + place.getLat() + place.getLng();
-                    placeModel.addElement(place.getName() + " " + place.getLat() + " " + place.getLng());
-                }*/
             } catch (ExecutionException | InterruptedException ex) {
                 System.out.println("Error while getting list of places!");
                 ex.printStackTrace();
@@ -72,19 +63,21 @@ public class UI
             {
                 int index = e.getLastIndex();
                 String lat, lng, place;
-                String[] coords = new String[3];
+                String[] cords = new String[3];
 
                 place = placeModel.getElementAt(index);
-                coords = place.split(" ");
-                lat = coords[1];
-                lng = coords[2];
+                int lngInd = place.indexOf("lng");
+                int latInd = place.indexOf("lat");
 
-                Weather weather;
+                lat = place.substring(latInd + 5, lngInd - 1); //+5 to pass lat= , -1 to avoid " " before lng
+                lng = place.substring(lngInd + 5); //+5 to pass lng=
 
                 try
                 {
-                    weather = controller.findWeather(lat, lng);
-                    weatherLabel.setText(weather.getMain() + " " + weather.getDescription());
+                    controller.findWeather(lat, lng).thenAccept(weather -> SwingUtilities.invokeLater(() ->{
+                        weatherLabel.setText(weather.getMain() + " " + weather.getDescription());
+                    }));
+
                 }
                 catch (ExecutionException | InterruptedException ex)
                 {
