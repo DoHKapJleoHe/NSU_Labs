@@ -2,7 +2,6 @@ package ru.nsu.vartazaryan.view;
 
 import ru.nsu.vartazaryan.controller.Controller;
 import ru.nsu.vartazaryan.controller.Place;
-import ru.nsu.vartazaryan.controller.Weather;
 
 import javax.swing.*;
 import java.util.concurrent.ExecutionException;
@@ -81,8 +80,11 @@ public class UI
                 }
                 catch (ExecutionException | InterruptedException ex)
                 {
+                    System.out.println("Error while getting weather!");
                     ex.printStackTrace();
                 }
+
+
             }
         });
     }

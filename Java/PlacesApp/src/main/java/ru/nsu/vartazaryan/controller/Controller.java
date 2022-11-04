@@ -55,16 +55,16 @@ public class Controller
 
     public CompletableFuture<Weather>  findWeather(String lat, String lng) throws ExecutionException, InterruptedException
     {
-        var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
-
         HttpClient client = HttpClient.newHttpClient();
+
+        var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
         var request = HttpRequest
                 .newBuilder()
                 .GET()
                 .uri(URI.create(stringURI_weather))
                 .build();
-        CompletableFuture<Weather> placeWeather = new CompletableFuture<>();
 
+        CompletableFuture<Weather> placeWeather = new CompletableFuture<>();
         placeWeather = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenApply(this::parseWeather);
@@ -88,8 +88,28 @@ public class Controller
         return weather;
     }
 
-    public void getInterestingPlaces()
+    public void getInterestingPlaces(String lat, String lng)
     {
+        HttpClient client = HttpClient.newHttpClient();
 
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/bbox?lon_min=%s&lat_min=%s&lon_max=%s&lat_max=%s&kinds=churches&format=geojson&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat, lng, lat);
+        var request = HttpRequest
+                .newBuilder()
+                .GET()
+                .uri(URI.create(stringURI_interestingPlaces))
+                .build();
+
+        CompletableFuture<List<InterestingPlaces>> interestingPlaces = new CompletableFuture<>();
+        interestingPlaces = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(this::parseInterestingPlaces);
+    }
+
+    public List<InterestingPlaces> parseInterestingPlaces(String response)
+    {
+        List<InterestingPlaces> places = new ArrayList<>();
+
+
+        return places;
     }
 }

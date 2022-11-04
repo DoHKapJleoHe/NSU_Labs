@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="03.11.2022">
+    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="05.11.2022">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Place.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/keys.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/keys.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -150,7 +149,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667445144729</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="05.11.2022">
+      <created>1667582232059</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667582232059</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -178,6 +184,7 @@
     <MESSAGE value="01.11.2022" />
     <MESSAGE value="02.11.2022" />
     <MESSAGE value="03.11.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="03.11.2022" />
+    <MESSAGE value="05.11.2022" />
+    <option name="LAST_COMMIT_MESSAGE" value="05.11.2022" />
   </component>
 </project>
