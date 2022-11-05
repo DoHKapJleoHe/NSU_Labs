@@ -1,6 +1,7 @@
 package ru.nsu.vartazaryan.view;
 
 import ru.nsu.vartazaryan.controller.Controller;
+import ru.nsu.vartazaryan.controller.InterestingPlaces;
 import ru.nsu.vartazaryan.controller.Place;
 
 import javax.swing.*;
@@ -40,10 +41,17 @@ public class UI
         weatherLabel.setVisible(true);
         frame.add(weatherLabel);
 
+        DefaultListModel<String> interestingPlacesModel = new DefaultListModel<>();
+        JList<String> interestingPlacesList = new JList<>(interestingPlacesModel);
+        interestingPlacesList.setVisible(true);
+        interestingPlacesList.setBounds(480, 380, 400, 300);
+        frame.add(interestingPlacesList);
+
         findButton.addActionListener(e -> {
             try
             {
                 controller.findPlaces(textField.getText()).thenAccept(places -> SwingUtilities.invokeLater(() -> {
+                    placeModel.clear(); // clear list from the previous request
                     for (Place place : places)
                     {
                         String ful;
@@ -75,6 +83,16 @@ public class UI
                 {
                     controller.findWeather(lat, lng).thenAccept(weather -> SwingUtilities.invokeLater(() ->{
                         weatherLabel.setText(weather.getMain() + " " + weather.getDescription());
+                    }));
+
+                    controller.getInterestingPlaces(lat, lng).thenAccept(interestingPlaces -> SwingUtilities.invokeLater(() -> {
+                        for(InterestingPlaces places : interestingPlaces)
+                        {
+                            interestingPlacesModel.clear();
+                            String ful;
+                            ful = places.getName()+" "+places.getId();
+                            interestingPlacesModel.addElement(ful);
+                        }
                     }));
 
                 }

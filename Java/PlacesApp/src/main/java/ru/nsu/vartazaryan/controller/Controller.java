@@ -88,11 +88,11 @@ public class Controller
         return weather;
     }
 
-    public void getInterestingPlaces(String lat, String lng)
+    public CompletableFuture<List<InterestingPlaces>> getInterestingPlaces(String lat, String lng)
     {
         HttpClient client = HttpClient.newHttpClient();
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/bbox?lon_min=%s&lat_min=%s&lon_max=%s&lat_max=%s&kinds=churches&format=geojson&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat, lng, lat);
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=1000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -103,12 +103,26 @@ public class Controller
         interestingPlaces = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
                 .thenApply(this::parseInterestingPlaces);
+
+        return interestingPlaces;
     }
 
     public List<InterestingPlaces> parseInterestingPlaces(String response)
     {
         List<InterestingPlaces> places = new ArrayList<>();
 
+        String name, id;
+        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+        JsonArray nameArr = json.get("name").getAsJsonArray();
+        JsonArray idArr = json.get("wikidata").getAsJsonArray();
+
+        for(int i = 0; i < 2; i++)
+        {
+            name = nameArr.get(i).getAsJsonObject().get("name").toString();
+            id = idArr.get(i).getAsJsonObject().get("wikidata").toString();
+
+            places.add(new InterestingPlaces(name, id));
+        }
 
         return places;
     }
