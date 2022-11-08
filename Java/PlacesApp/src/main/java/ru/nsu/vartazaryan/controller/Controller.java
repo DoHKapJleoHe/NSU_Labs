@@ -92,7 +92,7 @@ public class Controller
     {
         HttpClient client = HttpClient.newHttpClient();
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=10000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=100000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -129,7 +129,7 @@ public class Controller
     {
         HttpClient client = HttpClient.newHttpClient();
 
-        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid?lang=ru,xid=%s", xid);
+        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid/%s?apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", xid);
         var request = HttpRequest
                 .newBuilder()
                 .GET()

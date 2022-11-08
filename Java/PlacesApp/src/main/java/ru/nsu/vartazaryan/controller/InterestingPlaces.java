@@ -21,9 +21,6 @@ public class InterestingPlaces
 
     @Override
     public String toString() {
-        return "InterestingPlaces{" +
-                "name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+        return name;
     }
 }

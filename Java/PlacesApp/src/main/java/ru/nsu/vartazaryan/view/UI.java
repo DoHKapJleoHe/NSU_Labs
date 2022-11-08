@@ -5,13 +5,17 @@ import ru.nsu.vartazaryan.controller.InterestingPlaces;
 import ru.nsu.vartazaryan.controller.Place;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class UI
 {
-    private static final Controller controller = new Controller();
+    private Controller controller = new Controller();
+    private List<Place> placeList = new ArrayList<>();
+    private List<InterestingPlaces> interestingPlacesList = new ArrayList<>();
 
-    public static void main(String[] args)
+    public void run()
     {
         JFrame frame = new JFrame();
         frame.setBounds(300, 0, 1000, 800);
@@ -59,11 +63,10 @@ public class UI
             {
                 controller.findPlaces(textField.getText()).thenAccept(places -> SwingUtilities.invokeLater(() -> {
                     placeModel.clear(); // clear list from the previous request
+                    placeList = places;
                     for (Place place : places)
                     {
-                        String ful;
-                        ful = place.getProp();
-                        placeModel.addElement(ful);
+                        placeModel.addElement(place.toString());
                     }
                 }));
             } catch (ExecutionException | InterruptedException ex) {
@@ -75,16 +78,11 @@ public class UI
         placeJList.addListSelectionListener(e -> {
             if(e.getValueIsAdjusting())
             {
-                int index = e.getLastIndex();
                 String lat, lng, place;
-                String[] cords = new String[3];
+                int index = e.getLastIndex();
 
-                place = placeModel.getElementAt(index);
-                int lngInd = place.indexOf("lng");
-                int latInd = place.indexOf("lat");
-
-                lat = place.substring(latInd + 5, lngInd - 1); //+5 to pass lat= , -1 to avoid " " before lng
-                lng = place.substring(lngInd + 5); //+5 to pass lng=
+                lat = placeList.get(index).getLat();
+                lng = placeList.get(index).getLat();
 
                 try
                 {
@@ -96,9 +94,9 @@ public class UI
                         for(InterestingPlaces places : interestingPlaces)
                         {
                             interestingPlacesModel.clear();
-                            String ful;
-                            ful = places.getName() + " " + "id" + " "+ places.getId();
-                            interestingPlacesModel.addElement(ful);
+                            interestingPlacesList = interestingPlaces;
+
+                            interestingPlacesModel.addElement(places.toString());
                         }
                     }));
 
@@ -117,10 +115,10 @@ public class UI
             if(e.getValueIsAdjusting())
             {
                 int index = e.getLastIndex();
-                String place = interestingPlacesModel.getElementAt(index);
-                int idIndex = place.indexOf("id");
-                String id = place.substring(idIndex + 4, place.length() - 1);
-                //System.out.println(id);
+
+                String id = interestingPlacesList.get(index).getId();
+                id = id.substring(1, id.length() -1);
+                System.out.println(id);
 
                 controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
                     System.out.println("info");

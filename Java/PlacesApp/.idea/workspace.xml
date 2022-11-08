@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="05.11.2022">
+    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="08.11.2022">
+      <change afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/InterestingPlaces.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/InterestingPlaces.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Place.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Place.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" afterDir="false" />
     </list>
@@ -44,7 +46,7 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
   </component>
-  <component name="RunManager" selected="Application.UI">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ru.nsu.vartazaryan.Main" />
       <module name="PlacesApp" />
@@ -73,8 +75,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UI" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.UI" />
       </list>
     </recent_temporary>
   </component>
@@ -171,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667635683426</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="08.11.2022">
+      <created>1667919455883</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667919455883</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,6 +209,22 @@
     <MESSAGE value="02.11.2022" />
     <MESSAGE value="03.11.2022" />
     <MESSAGE value="05.11.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="05.11.2022" />
+    <MESSAGE value="08.11.2022" />
+    <option name="LAST_COMMIT_MESSAGE" value="08.11.2022" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java</url>
+          <line>146</line>
+          <properties class="ru.nsu.vartazaryan.controller.Controller" method="parseInfo">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

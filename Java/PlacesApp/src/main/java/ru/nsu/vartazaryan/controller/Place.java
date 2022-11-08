@@ -13,21 +13,16 @@ public class Place
         this.name = name;
     }
 
-    public String getProp()
-    {
-        return name+" "+"lat="+" "+lat+" "+"lng="+" "+lng;
-    }
-
     public String getLat() {
         return lat;
     }
 
-    public String getLng() {
-        return lng;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public String getLng() {
+        return lng;
     }
 
     @Override
