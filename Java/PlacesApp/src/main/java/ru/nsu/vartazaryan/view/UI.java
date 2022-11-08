@@ -17,7 +17,7 @@ public class UI
         frame.setBounds(300, 0, 1000, 800);
         frame.getContentPane().setLayout(null);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setVisible(true);
+
 
         JButton findButton = new JButton("Find!");
         findButton.setBounds(30, 30, 100, 25);
@@ -42,10 +42,17 @@ public class UI
         frame.add(weatherLabel);
 
         DefaultListModel<String> interestingPlacesModel = new DefaultListModel<>();
-        JList<String> interestingPlacesList = new JList<>(interestingPlacesModel);
-        interestingPlacesList.setVisible(true);
-        interestingPlacesList.setBounds(480, 380, 400, 300);
-        frame.add(interestingPlacesList);
+        JList<String> interestingPlacesJList = new JList<>(interestingPlacesModel);
+        interestingPlacesJList.setVisible(true);
+        interestingPlacesJList.setBounds(480, 380, 400, 300);
+        frame.add(interestingPlacesJList);
+
+        JLabel infoAboutPlace = new JLabel("info");
+        infoAboutPlace.setBounds(50, 380, 400, 100);
+        infoAboutPlace.setVisible(true);
+        frame.add(infoAboutPlace);
+
+        frame.setVisible(true);
 
         findButton.addActionListener(e -> {
             try
@@ -90,7 +97,7 @@ public class UI
                         {
                             interestingPlacesModel.clear();
                             String ful;
-                            ful = places.getName()+" "+places.getId();
+                            ful = places.getName() + " " + "id" + " "+ places.getId();
                             interestingPlacesModel.addElement(ful);
                         }
                     }));
@@ -103,6 +110,22 @@ public class UI
                 }
 
 
+            }
+        });
+
+        interestingPlacesJList.addListSelectionListener(e -> {
+            if(e.getValueIsAdjusting())
+            {
+                int index = e.getLastIndex();
+                String place = interestingPlacesModel.getElementAt(index);
+                int idIndex = place.indexOf("id");
+                String id = place.substring(idIndex + 4, place.length() - 1);
+                //System.out.println(id);
+
+                controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
+                    System.out.println("info");
+                    infoAboutPlace.setText(info);
+                }));
             }
         });
     }

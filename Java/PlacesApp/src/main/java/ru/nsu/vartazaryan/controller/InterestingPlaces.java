@@ -18,4 +18,12 @@ public class InterestingPlaces
     public String getId() {
         return id;
     }
+
+    @Override
+    public String toString() {
+        return "InterestingPlaces{" +
+                "name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                '}';
+    }
 }

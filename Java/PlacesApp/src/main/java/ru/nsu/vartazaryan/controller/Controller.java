@@ -92,7 +92,7 @@ public class Controller
     {
         HttpClient client = HttpClient.newHttpClient();
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=1000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=10000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -112,18 +112,48 @@ public class Controller
         List<InterestingPlaces> places = new ArrayList<>();
 
         String name, id;
-        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-        JsonArray nameArr = json.get("name").getAsJsonArray();
-        JsonArray idArr = json.get("wikidata").getAsJsonArray();
+        JsonArray json = JsonParser.parseString(response).getAsJsonArray();
 
-        for(int i = 0; i < 2; i++)
+        for(int i = 0; i < json.size(); i++)
         {
-            name = nameArr.get(i).getAsJsonObject().get("name").toString();
-            id = idArr.get(i).getAsJsonObject().get("wikidata").toString();
+            name = json.get(i).getAsJsonObject().get("name").toString();
+            id = json.get(i).getAsJsonObject().get("xid").toString();
 
             places.add(new InterestingPlaces(name, id));
         }
 
         return places;
+    }
+
+    public CompletableFuture<String> getPlaceInfoById(String xid)
+    {
+        HttpClient client = HttpClient.newHttpClient();
+
+        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid?lang=ru,xid=%s", xid);
+        var request = HttpRequest
+                .newBuilder()
+                .GET()
+                .uri(URI.create(stringURI_info))
+                .build();
+
+        CompletableFuture<String> info = new CompletableFuture<>();
+        info = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+                .thenApply(HttpResponse::body)
+                .thenApply(this::parseInfo);
+
+        return info;
+    }
+
+    private String parseInfo(String request)
+    {
+        JsonArray arr = JsonParser.parseString(request).getAsJsonArray();
+        String info = null;
+
+        for(int i = 0; i < arr.size(); i++)
+        {
+            info = arr.get(i).getAsJsonObject().get("info").getAsJsonObject().get("descr").toString();
+        }
+
+        return info;
     }
 }
