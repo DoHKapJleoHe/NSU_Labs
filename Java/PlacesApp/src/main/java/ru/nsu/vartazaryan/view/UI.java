@@ -6,6 +6,7 @@ import ru.nsu.vartazaryan.controller.Place;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -75,6 +76,8 @@ public class UI
             } catch (ExecutionException | InterruptedException ex) {
                 System.out.println("Error while getting list of places!");
                 ex.printStackTrace();
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
         });
 
@@ -107,6 +110,8 @@ public class UI
                 {
                     System.out.println("Error while getting weather!");
                     ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
@@ -120,10 +125,14 @@ public class UI
                 id = id.substring(1, id.length() - 1);
                 System.out.println(id);
 
-                controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
-                    infoAboutPlace.setText("");
-                    infoAboutPlace.append(info);
-                }));
+                try {
+                    controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
+                        infoAboutPlace.setText("");
+                        infoAboutPlace.append(info);
+                    }));
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
     }

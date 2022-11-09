@@ -4,28 +4,32 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 public class Controller
 {
-    public CompletableFuture<List<Place>> findPlaces(String text) throws ExecutionException, InterruptedException {
+    public CompletableFuture<List<Place>> findPlaces(String text) throws ExecutionException, InterruptedException, IOException {
         HttpClient client = HttpClient.newHttpClient();
 
-        var stringURI_places = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=55da9d34-cfc0-4f3e-82bb-48eb0cd9ef38", text);
+
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
+
+        var stringURI_places = String.format("https://graphhopper.com/api/1/geocode?q=%s&locale=en&key=%s", text, properties.get("key_places"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
                 .uri(URI.create(stringURI_places))
                 .build();
-
-        //System.out.println(request);
 
         CompletableFuture<List<Place>> places = new CompletableFuture<List<Place>>();
         places = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -55,11 +59,12 @@ public class Controller
         return placeList;
     }
 
-    public CompletableFuture<Weather>  findWeather(String lat, String lng) throws ExecutionException, InterruptedException
-    {
+    public CompletableFuture<Weather>  findWeather(String lat, String lng) throws ExecutionException, InterruptedException, IOException {
         HttpClient client = HttpClient.newHttpClient();
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=936235de21b90aa0788fb20ec5efe8fa", lat, lng);
+        var stringURI_weather = String.format("http://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s", lat, lng, properties.get("key_weather"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -88,11 +93,12 @@ public class Controller
         return weather;
     }
 
-    public CompletableFuture<List<InterestingPlaces>> getInterestingPlaces(String lat, String lng)
-    {
+    public CompletableFuture<List<InterestingPlaces>> getInterestingPlaces(String lat, String lng) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=100000&lon=%s&lat=%s&format=json&limit=2&apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", lng, lat);
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=100000&lon=%s&lat=%s&format=json&limit=2&apikey=%s", lng, lat, properties.get("key_tripmap"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -127,11 +133,12 @@ public class Controller
         return places;
     }
 
-    public CompletableFuture<String> getPlaceInfoById(String xid)
-    {
+    public CompletableFuture<String> getPlaceInfoById(String xid) throws IOException {
         HttpClient client = HttpClient.newHttpClient();
+        Properties properties = new Properties();
+        properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid/%s?apikey=5ae2e3f221c38a28845f05b6d9e0b6fa8c894ce4eef74f7b2e15830c", xid);
+        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid/%s?apikey=%s", xid, properties.get("key_tripmap"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -148,7 +155,6 @@ public class Controller
         return info;
     }
 
-    // TODO: Correct this parsing method
     private String parseInfo(String request)
     {
         System.out.println(request);
