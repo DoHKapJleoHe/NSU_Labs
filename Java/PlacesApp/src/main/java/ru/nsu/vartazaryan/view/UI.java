@@ -121,7 +121,7 @@ public class UI
                 System.out.println(id);
 
                 controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
-                    //infoAboutPlace.setText("");
+                    infoAboutPlace.setText("");
                     infoAboutPlace.append(info);
                 }));
             }
