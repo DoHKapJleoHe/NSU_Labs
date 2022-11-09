@@ -5,13 +5,14 @@ import ru.nsu.vartazaryan.controller.InterestingPlaces;
 import ru.nsu.vartazaryan.controller.Place;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class UI
 {
-    private Controller controller = new Controller();
+    private final Controller controller = new Controller();
     private List<Place> placeList = new ArrayList<>();
     private List<InterestingPlaces> interestingPlacesList = new ArrayList<>();
 
@@ -51,9 +52,11 @@ public class UI
         interestingPlacesJList.setBounds(480, 380, 400, 300);
         frame.add(interestingPlacesJList);
 
-        JLabel infoAboutPlace = new JLabel("info");
-        infoAboutPlace.setBounds(50, 380, 400, 100);
+        JTextArea infoAboutPlace = new JTextArea();
+        infoAboutPlace.setBounds(50, 280, 400, 400);
         infoAboutPlace.setVisible(true);
+        infoAboutPlace.setEditable(false);
+        infoAboutPlace.setLineWrap(true);
         frame.add(infoAboutPlace);
 
         frame.setVisible(true);
@@ -91,23 +94,20 @@ public class UI
                     }));
 
                     controller.getInterestingPlaces(lat, lng).thenAccept(interestingPlaces -> SwingUtilities.invokeLater(() -> {
+                        interestingPlacesModel.clear();
                         for(InterestingPlaces places : interestingPlaces)
                         {
-                            interestingPlacesModel.clear();
                             interestingPlacesList = interestingPlaces;
 
                             interestingPlacesModel.addElement(places.toString());
                         }
                     }));
-
                 }
                 catch (ExecutionException | InterruptedException ex)
                 {
                     System.out.println("Error while getting weather!");
                     ex.printStackTrace();
                 }
-
-
             }
         });
 
@@ -117,12 +117,12 @@ public class UI
                 int index = e.getLastIndex();
 
                 String id = interestingPlacesList.get(index).getId();
-                id = id.substring(1, id.length() -1);
+                id = id.substring(1, id.length() - 1);
                 System.out.println(id);
 
                 controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
-                    System.out.println("info");
-                    infoAboutPlace.setText(info);
+                    //infoAboutPlace.setText("");
+                    infoAboutPlace.append(info);
                 }));
             }
         });

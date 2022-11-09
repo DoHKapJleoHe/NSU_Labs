@@ -28,6 +28,6 @@ public class Place
     @Override
     public String toString()
     {
-        return this.name + " (lat: " + this.lat + " lng: " + this.lng + ")" +"\n";
+        return this.name + " (lng: " + this.lng + " lat: " + this.lat + ")" +"\n";
     }
 }

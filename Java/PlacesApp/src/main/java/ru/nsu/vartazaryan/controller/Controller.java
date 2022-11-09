@@ -25,6 +25,8 @@ public class Controller
                 .uri(URI.create(stringURI_places))
                 .build();
 
+        //System.out.println(request);
+
         CompletableFuture<List<Place>> places = new CompletableFuture<List<Place>>();
         places = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
@@ -74,8 +76,6 @@ public class Controller
 
     private Weather parseWeather(String response)
     {
-
-
         JsonObject json = JsonParser.parseString(response).getAsJsonObject();
         JsonArray arr = json.get("weather").getAsJsonArray();
 
@@ -98,6 +98,8 @@ public class Controller
                 .GET()
                 .uri(URI.create(stringURI_interestingPlaces))
                 .build();
+
+        System.out.println(request);
 
         CompletableFuture<List<InterestingPlaces>> interestingPlaces = new CompletableFuture<>();
         interestingPlaces = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
@@ -136,6 +138,8 @@ public class Controller
                 .uri(URI.create(stringURI_info))
                 .build();
 
+        System.out.println(request);
+
         CompletableFuture<String> info = new CompletableFuture<>();
         info = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
@@ -144,15 +148,12 @@ public class Controller
         return info;
     }
 
+    // TODO: Correct this parsing method
     private String parseInfo(String request)
     {
-        JsonArray arr = JsonParser.parseString(request).getAsJsonArray();
-        String info = null;
-
-        for(int i = 0; i < arr.size(); i++)
-        {
-            info = arr.get(i).getAsJsonObject().get("info").getAsJsonObject().get("descr").toString();
-        }
+        System.out.println(request);
+        JsonObject obj = JsonParser.parseString(request).getAsJsonObject();
+        String info = obj.get("info").getAsJsonObject().get("descr").toString();
 
         return info;
     }
