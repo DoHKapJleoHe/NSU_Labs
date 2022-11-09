@@ -129,6 +129,7 @@ public class UI
                     controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
                         infoAboutPlace.setText("");
                         infoAboutPlace.append(info);
+                        System.out.println("Hi");
                     }));
                 } catch (IOException ex) {
                     ex.printStackTrace();

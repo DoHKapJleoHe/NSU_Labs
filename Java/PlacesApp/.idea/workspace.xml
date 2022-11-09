@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="09.11.2022">
+    <list default="true" id="2ce7c68c-249b-466d-88e0-f8e5edbb8fa7" name="Changes" comment="added property file for api keys">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/controller/Controller.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/nsu/vartazaryan/view/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ru/nsu/vartazaryan/view/UI.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667986710591</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="added property file for api keys">
+      <created>1667988104677</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667988104677</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -228,6 +236,7 @@
     <MESSAGE value="05.11.2022" />
     <MESSAGE value="08.11.2022" />
     <MESSAGE value="09.11.2022" />
-    <option name="LAST_COMMIT_MESSAGE" value="09.11.2022" />
+    <MESSAGE value="added property file for api keys" />
+    <option name="LAST_COMMIT_MESSAGE" value="added property file for api keys" />
   </component>
 </project>

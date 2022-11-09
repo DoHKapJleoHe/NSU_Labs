@@ -98,7 +98,7 @@ public class Controller
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/ru/places/radius?lang=ru&radius=100000&lon=%s&lat=%s&format=json&limit=2&apikey=%s", lng, lat, properties.get("key_tripmap"));
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/en/places/radius?lang=en&radius=100000&lat=%s&lon=%s&format=json&limit=10&apikey=%s", lat, lng, properties.get("key_tripmap"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
