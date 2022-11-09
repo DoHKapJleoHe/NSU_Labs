@@ -98,7 +98,8 @@ public class Controller
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/en/places/radius?lang=en&radius=100000&lat=%s&lon=%s&format=json&limit=10&apikey=%s", lat, lng, properties.get("key_tripmap"));
+        var stringURI_interestingPlaces = String.format("http://api.opentripmap.com/0.1/en/places/radius?lang=en&radius=1000&lat=%s&lon=%s&limit=5&apikey=%s",
+                                                                lat, lng, properties.get("key_tripmap"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -120,12 +121,13 @@ public class Controller
         List<InterestingPlaces> places = new ArrayList<>();
 
         String name, id;
-        JsonArray json = JsonParser.parseString(response).getAsJsonArray();
+        JsonObject object = JsonParser.parseString(response).getAsJsonObject();
+        JsonArray json = object.getAsJsonArray("features");
 
         for(int i = 0; i < json.size(); i++)
         {
-            name = json.get(i).getAsJsonObject().get("name").toString();
-            id = json.get(i).getAsJsonObject().get("xid").toString();
+            name = json.get(i).getAsJsonObject().get("properties").getAsJsonObject().get("name").toString();
+            id = json.get(i).getAsJsonObject().get("properties").getAsJsonObject().get("xid").toString();
 
             places.add(new InterestingPlaces(name, id));
         }
@@ -138,7 +140,7 @@ public class Controller
         Properties properties = new Properties();
         properties.load(Thread.currentThread().getContextClassLoader().getResourceAsStream("keys.properties"));
 
-        var stringURI_info = String.format("http://api.opentripmap.com/0.1/ru/places/xid/%s?apikey=%s", xid, properties.get("key_tripmap"));
+        var stringURI_info = String.format("http://api.opentripmap.com/0.1/en/places/xid/%s?apikey=%s", xid, properties.get("key_tripmap"));
         var request = HttpRequest
                 .newBuilder()
                 .GET()
@@ -159,7 +161,7 @@ public class Controller
     {
         System.out.println(request);
         JsonObject obj = JsonParser.parseString(request).getAsJsonObject();
-        String info = obj.get("info").getAsJsonObject().get("descr").toString();
+        String info = obj.get("wikipedia_extracts").getAsJsonObject().get("text").toString();
 
         return info;
     }

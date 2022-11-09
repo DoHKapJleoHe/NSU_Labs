@@ -88,7 +88,7 @@ public class UI
                 int index = e.getLastIndex();
 
                 lat = placeList.get(index).getLat();
-                lng = placeList.get(index).getLat();
+                lng = placeList.get(index).getLng();
 
                 try
                 {
@@ -122,13 +122,12 @@ public class UI
                 int index = e.getLastIndex();
 
                 String id = interestingPlacesList.get(index).getId();
-                id = id.substring(1, id.length() - 1);
+                id = id.substring(1, id.length()-1);
                 System.out.println(id);
 
                 try {
                     controller.getPlaceInfoById(id).thenAccept(info -> SwingUtilities.invokeLater(() -> {
-                        infoAboutPlace.setText("");
-                        infoAboutPlace.append(info);
+                        infoAboutPlace.setText(info);
                         System.out.println("Hi");
                     }));
                 } catch (IOException ex) {
