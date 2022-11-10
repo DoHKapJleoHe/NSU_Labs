@@ -157,10 +157,11 @@ public class Controller
         return info;
     }
 
-    private String parseInfo(String request)
+    //TODO: add another parser if there is an info field in response
+    private String parseInfo(String response)
     {
-        System.out.println(request);
-        JsonObject obj = JsonParser.parseString(request).getAsJsonObject();
+        System.out.println(response);
+        JsonObject obj = JsonParser.parseString(response).getAsJsonObject();
         String info = obj.get("wikipedia_extracts").getAsJsonObject().get("text").toString();
 
         return info;
