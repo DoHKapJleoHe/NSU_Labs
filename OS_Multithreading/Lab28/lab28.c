@@ -68,34 +68,34 @@ int main(int argc, char* argv[])
 	    {
 	        if( FD_ISSET(0, &fds) )
 	        {
-                is_stopped = 0;
-                read(0, reading_buffer, 256);
+               	    is_stopped = 0;
+                    read(0, reading_buffer, 256);
 	        }
 	        if( FD_ISSET(cfd, &fds) )
 	        {
-		        //reading response
-		        int nbytes;
+		    //reading response
+		    int nbytes;
 
-                if(is_stopped != 1)
-                {
-		            nbytes = read(cfd, response_buffer, 256);
-                    if(nbytes <= 0)
+                    if(is_stopped != 1)
                     {
-                         program_finished = 1; 
-                    }
-                    else
-                    {
-		                write(1, response_buffer, 256);
-                        lines_typed++;
-                        if(lines_typed == 25)
+		        nbytes = read(cfd, response_buffer, 256);
+                        if(nbytes <= 0)
                         {
-                            lines_typed = 0;
-                            is_stopped = 1;
-                            printf("\n----------PRESS SPACE TO SCROLL DOWN----------\n");
+                            program_finished = 1; 
                         }
-                        memset(&response_buffer, 0, sizeof(char));
+                        else
+                        {
+		            write(1, response_buffer, 256);
+                            lines_typed++;
+                            if(lines_typed == 25)
+                            {
+                                lines_typed = 0;
+                                is_stopped = 1;
+                                printf("\n----------PRESS SPACE TO SCROLL DOWN----------\n");
+                            }
+                            memset(&response_buffer, 0, sizeof(char));
+                        }   
                     }
-                }
 	        }
 	    }
 
