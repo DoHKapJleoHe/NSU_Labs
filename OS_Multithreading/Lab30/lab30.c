@@ -169,5 +169,6 @@ int main(int argc, char* argv[])
     }
 
     pthread_mutex_destroy(&stop_mutex);
+    pthread_cond_destroy(&cond);
     return 0;
 }
