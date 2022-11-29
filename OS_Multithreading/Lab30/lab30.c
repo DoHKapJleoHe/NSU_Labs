@@ -21,7 +21,7 @@ void* send_request(void* arg)
 {
     int sfd;
     int err;
-    char errbuf[30];
+    char errbuf[ERROR_BUFFER_LENGTH];
     char* port = "80";
     char* host = (char*)arg;
 
