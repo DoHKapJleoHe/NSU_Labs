@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class ComFac
 {
-    /*Factory is a thing that creates commands by given name. Then you can use made command to some stuff.
+    /*Factory is a thing that creates commands by given name. Then you can use created command.
       Class.forName("ru.nsu.ccfit.vartazaryan.lab2.someClass") - returns object of "class" class initialized by "someClass"
       getConstructor() - returns object of "constructor" class of class "someClass
       newInstance() - creates object of "someClass" class by constructor, that was returned from getConstructor()"*/
