@@ -15,7 +15,7 @@ public class Main
         {
             FileCalculator calculator = new FileCalculator();
             String path = args[0];
-            calculator.Run(path);
+            calculator.run(path);
         }
         else //reading from console
         {
