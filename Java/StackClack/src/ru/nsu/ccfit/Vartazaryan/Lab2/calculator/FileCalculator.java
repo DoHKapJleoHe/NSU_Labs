@@ -12,7 +12,7 @@ public class FileCalculator
 {
     public FileCalculator() {} //Constructor
 
-    public void Run(String path) throws FileNotFoundException
+    public void run(String path) throws FileNotFoundException
     {
         File file = new File(path);
         Scanner scanner = new Scanner(file);
